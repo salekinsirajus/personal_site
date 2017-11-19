@@ -1,0 +1,89 @@
+#temp_style
+{
+    background-color: green;
+}
+
+/* Adding top padding to fix bootstrap fixed navbar 
+   Should be resposive
+*/
+body {
+    padding-top: 100px;     }
+@media screen and (max-width: 768px;){
+    body{padding-top: 0px;}
+    }
+
+/*Changing all the link color*/
+a {
+    color: #425B6D;
+}
+a:hover {
+    color: #607686;
+}
+a:active{
+    color: red;
+/*    color: #1B3446;*/
+}
+
+/* non-body large texts should be thin all accross*/
+#ultra_big{
+    font-weight: 100;
+    font-size: 3em;
+    font-family: sans-serif;
+    color: #607686;
+}
+
+/*styles for making the main text readable*/
+#text_body{
+    background-color: #FDFDFD;
+    color: #1A1A1A;
+    font-size: 1.2em;
+    font-family: serif;
+    min-height: 87vh;    
+}
+
+/*fixing the next and previous navigation on blog post*/
+#next_prev{
+    display: inline-block;
+}
+
+/* Changing navbar background color*/
+.navbar-fixed-top{
+    opacity:1.0;
+    background-color: white;
+    }
+
+/*Changing font family*/
+*{
+    font-family: 'Helvetica', serif;
+    }
+
+/*Changing the font weight for the site headline*/
+h1{
+    font-weight: 200;
+}
+
+h2{
+    font-weight: 200;
+}
+
+/*
+setting bottom = 0 at footer 
+and min-height = xxvh in #text_body 
+set the footer at the bottom of the page
+*/
+.footer{
+    display: block;
+    position: relative;
+    bottom:0;
+}
+
+/* style for background image in landing page
+ using an id selector*/
+#landing-bg{
+ width: 100%;
+ height: 600px;
+ display: table;
+ background-image: url('face.jpg'); 
+ background-repeat: no-repeat;
+ background-position: left;
+ }
