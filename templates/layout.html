@@ -1,0 +1,111 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8"> 
+    <meta http-equiv="X-UA_compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <!--<link rel="stylesheet" href="{{ '/static/style.css'|url }}"> -->
+    <!-- Adding bootstrap stylesheets-->
+    <link rel="stylesheet" type="text/css" href="{{'/css/bootstrap.min.css'|url}}">
+    <!-- Social icons -->
+    <link rel="stylesheet" href="{{'/css/bootstrap-social.css'|asseturl}}">
+    <!-- Adding font-awesome -->
+    <link rel="stylesheet" href="{{ '/font-awesome-4.7.0/css/font-awesome.min.css'|asseturl }}">
+    <!-- Custom styles on top of bootstrap -->
+    <link rel="stylesheet" href="{{'/css/custom_styles.css'|url}}">
+
+    <title>{% block title %}Welcome{% endblock %} — Sirajus Salekin</title>
+</head>
+
+<body class="container-fluid">
+    <!-- header class used to be a row, stacked on top of the body and footer -->
+    <!-- We're gonna try using that as fixed navbar instead -->
+    <header class= "row"> <!-- row-->
+        <div class="container">
+            <nav class="nav navbar-fixed-top">
+                <div class="row">
+                    <h1 class="text-center" href="{{'/'|url}}">SIRAJUS SALEKIN</h1>
+                </div>
+                <div class="row">
+                    <div class= "col-sm-8 col-sm-offset-2">
+                        <!-- ul class= "nav nav-pills nav-justified" -->
+                        <ul class="nav nav-pills nav-justified">
+                        <li{% if this._path == '/' %} class="nav-item"{% endif
+                            %}><a href="{{ '/'|url }}">Home</a></li>
+                            {% for href, title in [
+                            ['/blog', 'Blog'],
+                            ['/projects', 'Projects'],
+                            ['/about', 'About']
+                            ] %}
+                        <li{% if this.is_child_of(href) %} class="active"{% endif
+                            %}><a href="{{ href|url }}">{{ title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div> <!-- container div -->
+    </header>
+
+    <div class="page row">
+        <div class ="col-sm-3" >
+        </div>
+        <div class="col-sm-6" id="text_body">
+            {% block body %} <h1>in the middle </h1> {% endblock %}
+            
+        </div>
+        <div class="col-sm-3">
+        </div>
+    </div>
+    <!-- find a better way to align the rows instead of fixing it to the bottom -->
+    <div class="footer row navbar">
+        <div class ="col-sm-5"> 
+            <h5 class="text-right">NAVIGATION</h5>
+            <ul class="list-group text-right">
+                    {% for href, title in [
+                    ['/',  'Home'],
+                    ['/blog', 'Blog'],
+                    ['/projects', 'Projects'],
+                    ['/about', 'About']
+                    ] %}
+                    <li class="list-group-item">
+                        <a href="{{ href|url }}">{{ title }}</a>
+                    {% endfor %}
+                    </li>
+            </ul>
+        </div>
+
+        <div class="col-sm-2">
+            <h5 class="text-center">SOCIAL</h5>
+            <a class="btn btn-block  btn-social btn-twitter"
+               href="http://twitter.com/sirsalekin"
+                >
+                <span class="fa fa-twitter" aria-hidden="true"></span>
+                Follow on Twitter
+            </a>
+            <a class="btn btn-block  btn-social btn-linkedin" 
+               href="https://www.linkedin.com/in/sisalekin" 
+                >
+                <span class="fa fa-linkedin fa-4x" aria-hidden="true"></span>
+                Connect on LinkedIn
+            </a>
+            <a class="btn btn-block  btn-social btn-github" 
+               href="https://github.com/salekinsirajus"
+                >
+                <span class="fa fa-github fa-4x" aria-hidden="true"></span>
+                Checkout GitHub repos
+            </a>
+            <a class="btn btn-block btn-social btn-flickr"
+               href="https://www.flickr.com/people/156070616@N07/"
+                >
+                <span class="fa fa-flickr fa-4x"></span>
+                Follow on Flickr
+            </a>
+        </div>
+
+        <div class="col-sm-5">
+            <h5 class="">CONTACT</h5>
+            Add an email form.
+            
+        </div>
+    </div>
+</body>

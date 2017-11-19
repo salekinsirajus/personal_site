@@ -1,0 +1,24 @@
+title: About Me and the Website
+---
+body:
+
+<h3>About The Website:</h3>
+<p>
+I wanted to have a web presence, but I wasn't wanting to use WordPress or Jekyll. As for WordPress, I didn't want to deal with a database, because this website
+is probably not going to contain that much data. Additionally, there is no point in adding a  "back-end" when I can get away with not using one but getting what
+I needed. As for not using Jekyll (or a completely static site generator), is that I do need a little bit of database-y features. Lektor CMS seemed to be the perfect solution for what I needed, as it doesn't have a full-fledged database but provides one with flat files. 
+</p>
+<p>
+I will put the code on GitHub and you can clone and develop it if you want.
+</p>
+
+<p></p>
+<h3> About Me: </h3>
+<p>
+I'm a college senior majoring in Computer Science and looking to start full-time work after May 2018. 
+I'm a native of Bangladesh; I was born, raised and educated there up until high school.
+Then I moved to the United States to go to college. 
+Before I fly for the US, I had no mental image of where I'm going to spend the next four years, 
+which is arguably the most formative years of life. However, it has been pleasant so far, forming close relationships with
+people and learning to be an adult, and I'd think Earlham prepared me well for venturing into the real world. I can't wait to experience what lies ahead! 
+</p>
