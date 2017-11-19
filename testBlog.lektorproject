@@ -3,9 +3,5 @@ name = Sirajus Salekin
 url = https://sirajussalekin.com/
 url_style = absolute
 
-[server.production]
-enabled = yes
-name = Production
-target = ghpages://salekinsirajus/personal_site?cname=www.sirajussalekin.com
-
-
+[servers.ghpages]
+target = ghpages+https://salekinsirajus/personal_site?cname=www.sirajussalekin.com
