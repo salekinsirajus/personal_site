@@ -2,6 +2,10 @@
 name = Sirajus Salekin
 url = https://sirajussalekin.com/
 url_style = absolute
+google-analytics = UA-38237304-1
 
 [servers.ghpages]
 target = ghpages+https://salekinsirajus/personal_site?cname=www.sirajussalekin.com
+
+[packages]
+lektor-google-analytics = 0.1.3
