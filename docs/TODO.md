@@ -7,3 +7,5 @@
  -[ ] Add an email form/sitemap
  -[ ] Make the project sections more detailed
  -[ ] Make the mobile nav collapsed
+ -[ ] Add blog search functionality
+ -[ ] Blog categorizing 
