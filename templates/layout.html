@@ -15,10 +15,10 @@
 
     <title>{% block title %}Welcome{% endblock %} — Sirajus Salekin</title>
 
-    <div class="ga-script"> {{ generate_google_analytics() }} </div>
 </head>
 
-<body class="container-fluid">
+<body class="container-fluid"> 
+    <div class="ga-script"> {{ generate_google_analytics() }} </div>
     <!-- header class used to be a row, stacked on top of the body and footer -->
     <!-- We're gonna try using that as fixed navbar instead -->
     <header class= "row"> <!-- row-->
