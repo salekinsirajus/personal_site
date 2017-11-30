@@ -11,7 +11,7 @@ a month. I just was not able to put together enough time to sort through the mix
 
 Long story short: I was trying to render raw HTML where my page model says markdown is going to be rendered in the body. But it took me a while: pinning down the problem into the exact domain is one of the more difficult parts of problem-solving, but as I have seen before, using simple tools to identify changes goes a long way. <code>print</code> has been my best friend ever since I have been writing Python. I haven't found something similar to <code>print</code> for CSS, but adding a background color to pinpoint this <code>div</code> tag and adding some text within helped me thus far. Along the way, I gained a tremendous amount of admiration for front-end developers: it's a pain in the butt to debug in your world. Ah, the final moral of the story: make the documentation reading count. Like read it slowly enough that you are not assuming you understand this framework when you don't. 
 
-Happy thanksgiving 2017!
+"Testing Changes"
 ---
 pub_date: 2017-11-17
 ---
