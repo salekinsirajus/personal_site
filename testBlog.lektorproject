@@ -4,7 +4,7 @@ url = https://sirajussalekin.com/
 url_style = absolute
 
 [servers.ghpages]
-target = ghpages+https://salekinsirajus/personal_site?cname=www.sirajussalekin.com
+target = ghpages+https://salekinsirajus/personal_site.git
 
 [packages]
 lektor-google-analytics = 0.1.3
