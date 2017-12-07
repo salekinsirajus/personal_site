@@ -10,7 +10,7 @@ install:
 script: "lektor build"
 deploy:
   provider: script
-  script: "set -e" && "lektor deploy ghpages" && "doctr deploy --built-docs $HOME/.cache/lektor/builds"
+  script: "set -e && lektor deploy ghpages && doctr deploy --built-docs $HOME/.cache/lektor/builds"
 branches:
   only:
     - master
