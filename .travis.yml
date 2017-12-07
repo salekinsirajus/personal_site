@@ -11,4 +11,5 @@ deploy:
   script: "lektor deploy ghpages"
 branches:
   only:
+    - master
     - gh-pages
