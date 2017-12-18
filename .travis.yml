@@ -1,23 +1,11 @@
 language: python
 python: 3.5
-cache:
-  directories:
-    - $HOME/.cache/pip
-    - $HOME/.cache/lektor/builds
-install: 
-    - "pip install Lektor"
-    - "pip install doctr"
+install: "pip install Lektor"
 script: "lektor build"
 deploy:
-  provider: script
-  script: "set -e && lektor deploy ghpages && doctr deploy --built-docs $HOME/.cache/lektor/builds"
-branches:
-  only:
-    - master
-    - gh-pages
-
-env:
-    global:
-# Doctr deploy key for salekinsirajus/personal_site
-        - secure: "YezIpZ5riiUn116tjMxHdkmiIJCFGSQbTH3xksej/3tuzU3ovRgayNnGZcj353OCUqHgHbspZvyRxn9ZsEpjBZargTPctpPvZHYamwTqvti0usOyZMrxSo8o/6QpUIgl3Wn58PJliny9cNX57YcdfuwvFXG2nxTzIKcB0tV7O/MQUY6CH+mmg4lx4SHtnfnB8ANwZwi+60QqHmPglEMlJJsSsQxQHD5LU2N/TE3OI6B3dUsAggu4B6OynjZg4hD6TmGASgGsEKzSs2ymFoRJcXunlQw1VGXyZcbG65lDk3ecY1OHxqREddDxhirO0y+CNvAJcos4Z8yGZjLtjvGonY2MqZz7P7Q7VqNitbswvvwwSHLFbfw5FfWIOZ18V+QstTOgC3ssKqw2wDMLZUgRG2g5WI5oRq72B4LOwxHce/4+kLOGinZ6omQ7/zyvXR/3NIH+kiocCffxX1l917pzjdT8usY/2Uz/lDnmlDGds00sYwNQ76gysdB7nmOe8WjnX3pQj8y08+AZq1G2BLtTCv3WUv34WCLshVza8KekEYAg+YhKq8qgvWjrU0dLGEtRQUP9fbWlpCUwjpIiY2MunsRLZgIh9svhnACjetwnalPl3HOumzvax3Ofi+Elk1Mu27hmvWA4R1NSclBOcS4sMTafHAvCy6jdSDENu6lvnKQ="
-
+    provider: script
+    script: "lektor deploy ghpages"
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    on:
+        branch: master
