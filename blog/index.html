@@ -14,9 +14,21 @@
     <link rel="stylesheet" href="/css/custom_styles.css">
 
     <title>Blog — Sirajus Salekin</title>
+
 </head>
 
-<body class="container-fluid">
+<body class="container-fluid"> 
+    <div class="ga-script"> 
+<div id="ga-script"></div>
+<script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-38237304-1', 'auto');
+        ga('send', 'pageview');
+</script>
+ </div>
     <!-- header class used to be a row, stacked on top of the body and footer -->
     <!-- We're gonna try using that as fixed navbar instead -->
     <header class= "row"> <!-- row-->
@@ -66,7 +78,7 @@
 <p>However, I could not really get this damn page to render correctly. I was adding HTML divs, and trying to use Bootstrap columns etc etc. The first part of it was rendering fine as HTML, but the second part was rendering as <code> code </code> and giving me basically the raw HTML. I was stuck at that for 
 a month. I just was not able to put together enough time to sort through the mix of Bootstrap, my added CSS on top, Python, and lektor's own way of doing things. But this finally came to an end tonight, as I finally got a night not grinding myself for yet another deadline and drowning in coffee.</p>
 <p>Long story short: I was trying to render raw HTML where my page model says markdown is going to be rendered in the body. But it took me a while: pinning down the problem into the exact domain is one of the more difficult parts of problem-solving, but as I have seen before, using simple tools to identify changes goes a long way. <code>print</code> has been my best friend ever since I have been writing Python. I haven't found something similar to <code>print</code> for CSS, but adding a background color to pinpoint this <code>div</code> tag and adding some text within helped me thus far. Along the way, I gained a tremendous amount of admiration for front-end developers: it's a pain in the butt to debug in your world. Ah, the final moral of the story: make the documentation reading count. Like read it slowly enough that you are not assuming you understand this framework when you don't.</p>
-<p>Happy thanksgiving 2017!</p>
+<p>"Testing Changes"</p>
 
   </div>
 
@@ -102,8 +114,7 @@ a month. I just was not able to put together enough time to sort through the mix
     on 2017-06-04
   </p>
   <p>This is the first blog post I'm ever making with Lektor. I plan to document as I learn more about this static website generator tool. I was looking to start an actual blog, but I haven't yet had the chance to do so. Finally, I thought this could be a good time to start now that I have the summer break. Moving on, the reason I choose Lektor over Wordpress or Jekyll is that it stays right in the middle. I don't know how much my blog will grow in terms of size, traffic hits, so spending money and a lot of effort getting a Wordpress site up and running seemed overkill. On the other hand, choosing tools Jekyll and Github Pages seemed a bit too simple-ish, as  I might want to add some dynamic features to this blog in future. Lektor seemed to be a nice middle groud.</p>
-<p>One other thing that I really liked about Lektor is it uses plain text files as a database. It makes sense for the work I'm doing: little to no need for a heavy database. I think it's really cool and brilliant! I will document what I leanr along the way, and I'm pretty excited for what lies ahead! 
-<code> some code </code></p>
+<p>One other thing that I really liked about Lektor is it uses plain text files as a database. It makes sense for the work I'm doing: little to no need for a heavy database. I think it's really cool and brilliant! I will document what I leanr along the way, and I'm pretty excited for what lies ahead!</p>
 
   </div>
 

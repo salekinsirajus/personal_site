@@ -14,9 +14,21 @@
     <link rel="stylesheet" href="/css/custom_styles.css">
 
     <title>Mixing of markdown and html — Sirajus Salekin</title>
+
 </head>
 
-<body class="container-fluid">
+<body class="container-fluid"> 
+    <div class="ga-script"> 
+<div id="ga-script"></div>
+<script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-38237304-1', 'auto');
+        ga('send', 'pageview');
+</script>
+ </div>
     <!-- header class used to be a row, stacked on top of the body and footer -->
     <!-- We're gonna try using that as fixed navbar instead -->
     <header class= "row"> <!-- row-->
@@ -66,7 +78,7 @@
 <p>However, I could not really get this damn page to render correctly. I was adding HTML divs, and trying to use Bootstrap columns etc etc. The first part of it was rendering fine as HTML, but the second part was rendering as <code> code </code> and giving me basically the raw HTML. I was stuck at that for 
 a month. I just was not able to put together enough time to sort through the mix of Bootstrap, my added CSS on top, Python, and lektor's own way of doing things. But this finally came to an end tonight, as I finally got a night not grinding myself for yet another deadline and drowning in coffee.</p>
 <p>Long story short: I was trying to render raw HTML where my page model says markdown is going to be rendered in the body. But it took me a while: pinning down the problem into the exact domain is one of the more difficult parts of problem-solving, but as I have seen before, using simple tools to identify changes goes a long way. <code>print</code> has been my best friend ever since I have been writing Python. I haven't found something similar to <code>print</code> for CSS, but adding a background color to pinpoint this <code>div</code> tag and adding some text within helped me thus far. Along the way, I gained a tremendous amount of admiration for front-end developers: it's a pain in the butt to debug in your world. Ah, the final moral of the story: make the documentation reading count. Like read it slowly enough that you are not assuming you understand this framework when you don't.</p>
-<p>Happy thanksgiving 2017!</p>
+<p>"Testing Changes"</p>
 
   </div>
 
@@ -100,7 +112,7 @@ a month. I just was not able to put together enough time to sort through the mix
 
     
         <li class="next"><a href="/blog/portfoilo-in-progress/">
-            Next</a>
+            Portfoilo in Progress</a>
         </li>
     
     </ul>

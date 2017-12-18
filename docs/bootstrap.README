@@ -1,9 +1,0 @@
-# Bootstrap Notes:
-I'm using bootstrap to the frontend prettier on this site. Let's be honest, there's isn't much of a
-"backend" here.
-
-* Treating the body as a container fluid, so it can fit into any devices
-* Breaking the whole page into three columns: header( that contains navbar), page row (contains the actual contents) and footer.
-
-* Then break page row, into 2 + 8 + 2 = 12 columns, as noted in bootstrap documentation
-
