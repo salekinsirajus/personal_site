@@ -1,0 +1,10 @@
+_model: page
+---
+_template: 404.html
+---
+title: 404 Not Found
+---
+body:
+
+Sorry, the page you requested is not available.
+
