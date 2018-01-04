@@ -13,7 +13,7 @@
     <!-- Custom styles on top of bootstrap -->
     <link rel="stylesheet" href="/css/custom_styles.css">
 
-    <title>Blog — Sirajus Salekin</title>
+    <title>Last Semester of College — Sirajus Salekin</title>
 
 </head>
 
@@ -60,68 +60,11 @@
         </div>
         <div class="col-sm-6" id="text_body">
             
+
   
-    
   <div class="blog-post">
   
-    <h2><a href="/blog/mixing-of-markdown-and-html/">Mixing of markdown and html</a></h2>
-  
-  <p class="meta">
-    written by
-    
-      <a href="https://twitter.com/sirsalekin">Sirajus Salekin</a>
-    
-    on 2017-11-17
-  </p>
-  <p>When I was trying to build the basic version of this site, I got stuck particularly on the front page. I just thought of making it look pretty neat so I wanted to basically write raw HTML in the <code>contents.lr</code> file. (Context: in lektor CMS, the idea is basically put the data in a UTF-8 encoded text file, with <code>.lr</code> extension, model it according to the model provided which basically describes what fields and data types a page is gonna have, and finally render with template file that has <code>.html</code> extension.)</p>
-<p>However, I could not really get this damn page to render correctly. I was adding HTML divs, and trying to use Bootstrap columns etc etc. The first part of it was rendering fine as HTML, but the second part was rendering as <code> code </code> and giving me basically the raw HTML. I was stuck at that for 
-a month. I just was not able to put together enough time to sort through the mix of Bootstrap, my added CSS on top, Python, and lektor's own way of doing things. But this finally came to an end tonight, as I finally got a night not grinding myself for yet another deadline and drowning in coffee.</p>
-<p>Long story short: I was trying to render raw HTML where my page model says markdown is going to be rendered in the body. But it took me a while: pinning down the problem into the exact domain is one of the more difficult parts of problem-solving, but as I have seen before, using simple tools to identify changes goes a long way. <code>print</code> has been my best friend ever since I have been writing Python. I haven't found something similar to <code>print</code> for CSS, but adding a background color to pinpoint this <code>div</code> tag and adding some text within helped me thus far. Along the way, I gained a tremendous amount of admiration for front-end developers: it's a pain in the butt to debug in your world. Ah, the final moral of the story: make the documentation reading count. Like read it slowly enough that you are not assuming you understand this framework when you don't.</p>
-<p>"Testing Changes"</p>
-
-  </div>
-
-  
-    
-  <div class="blog-post">
-  
-    <h2><a href="/blog/portfoilo-in-progress/">Portfoilo in Progress</a></h2>
-  
-  <p class="meta">
-    written by
-    
-      <a href="https://twitter.com/sirsalekin">Sirajus Salekin</a>
-    
-    on 2017-08-21
-  </p>
-  <p>I have been working on this project sporadically. I work on it a day or two, then forget about it, and then come back again in another two to three weeks. Right now, I'm trying to give this site somewhat decent look, but holy mother of god, it's such a pain in the ass to do the work of a designer when you've never done design work.  I just don't want it to look it super ugly: if it doesn't get me hired that's fine, but I don't want it to repel the visitors.</p>
-<p>I'm using bootstrap, and added Font Awesome, which has a very cool collection of icons. I also added bootstrap-social to give the social media buttons a polished look. I'm looking into Material Design and Color Theory stuff right now to see if there's anything I can learn from, and add that here.</p>
-
-  </div>
-
-  
-    
-  <div class="blog-post">
-  
-    <h2><a href="/blog/first-post/">Hello Lektor</a></h2>
-  
-  <p class="meta">
-    written by
-    
-      <a href="https://twitter.com/shaownism">Sirajus Salekin</a>
-    
-    on 2017-06-04
-  </p>
-  <p>This is the first blog post I'm ever making with Lektor. I plan to document as I learn more about this static website generator tool. I was looking to start an actual blog, but I haven't yet had the chance to do so. Finally, I thought this could be a good time to start now that I have the summer break. Moving on, the reason I choose Lektor over Wordpress or Jekyll is that it stays right in the middle. I don't know how much my blog will grow in terms of size, traffic hits, so spending money and a lot of effort getting a Wordpress site up and running seemed overkill. On the other hand, choosing tools Jekyll and Github Pages seemed a bit too simple-ish, as  I might want to add some dynamic features to this blog in future. Lektor seemed to be a nice middle groud.</p>
-<p>One other thing that I really liked about Lektor is it uses plain text files as a database. It makes sense for the work I'm doing: little to no need for a heavy database. I think it's really cool and brilliant! I will document what I leanr along the way, and I'm pretty excited for what lies ahead!</p>
-
-  </div>
-
-  
-    
-  <div class="blog-post">
-  
-    <h2><a href="/blog/last-semester-of-college/">Last Semester of College</a></h2>
+    <h2>Last Semester of College</h2>
   
   <p class="meta">
     written by
@@ -150,19 +93,42 @@ See you there, pal.</p>
 
   </div>
 
-  
+  <div class="">
 
-  
-  <div class="pagination">
+    </center>
+
+        <a href="">
+            <span class="fa fa-facebook-square facebook-button fa-3x"></span>
+        </a>
+
+        <a href="">
+            <span class="fa fa-twitter-square twitter-button fa-3x"></span>
+        </a>
+
+        <a href="">
+            <span class="fa fa-linkedin-square linkedin-button fa-3x"></span>
+        </a>
+
+        <a href="">
+            <span class="fa fa-pinterest-square pinterest-button fa-3x"></span>
+        </a>
+
+        <a href="">
+            <span class="fa fa-google-plus-square google-plus-button fa-3x"></span>
+        </a>
+    </center>
     
-      <span class="disabled">&laquo; Previous</span>
+    <ul class="pager">
     
-    | 1 |
+        <li class="previous"><a href="/blog/first-post/">
+            Hello Lektor</a>
+        </li>
     
-      <span class="disabled">Next &raquo;</span>
+
+    
+    </ul>
     
   </div>
-
 
             
         </div>
