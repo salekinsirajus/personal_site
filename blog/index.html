@@ -64,63 +64,6 @@
     
   <div class="blog-post">
   
-    <h2><a href="/blog/mixing-of-markdown-and-html/">Markdown and HTML codes mixed</a></h2>
-  
-  <p class="meta">
-    written by
-    
-      <a href="https://twitter.com/sirsalekin">Sirajus Salekin</a>
-    
-    on 2017-11-17
-  </p>
-  <p>When I was trying to build the basic version of this site, I got stuck particularly on the front page. I just thought of making it look pretty neat so I wanted to basically write raw HTML in the <code>contents.lr</code> file. (Context: in lektor CMS, the idea is basically put the data in a UTF-8 encoded text file, with <code>.lr</code> extension, model it according to the model provided which basically describes what fields and data types a page is gonna have, and finally render with template file that has <code>.html</code> extension.)</p>
-<p>However, I could not really get this damn page to render correctly. I was adding HTML divs, and trying to use Bootstrap columns etc etc. The first part of it was rendering fine as HTML, but the second part was rendering as <code> code </code> and giving me basically the raw HTML. I was stuck at that for 
-a month. I just was not able to put together enough time to sort through the mix of Bootstrap, my added CSS on top, Python, and lektor's own way of doing things. But this finally came to an end tonight, as I finally got a night not grinding myself for yet another deadline and drowning in coffee.</p>
-<p>Long story short: I was trying to render raw HTML where my page model says markdown is going to be rendered in the body. But it took me a while: pinning down the problem into the exact domain is one of the more difficult parts of problem-solving, but as I have seen before, using simple tools to identify changes goes a long way. <code>print</code> has been my best friend ever since I have been writing Python. I haven't found something similar to <code>print</code> for CSS, but adding a background color to pinpoint this <code>div</code> tag and adding some text within helped me thus far. Along the way, I gained a tremendous amount of admiration for front-end developers: it's a pain in the butt to debug in your world. Ah, the final moral of the story: make the documentation reading count. Like read it slowly enough that you are not assuming you understand this framework when you don't.</p>
-<p>"Testing Changes"</p>
-
-  </div>
-
-  
-    
-  <div class="blog-post">
-  
-    <h2><a href="/blog/portfoilo-in-progress/">Portfoilo in Progress</a></h2>
-  
-  <p class="meta">
-    written by
-    
-      <a href="https://twitter.com/sirsalekin">Sirajus Salekin</a>
-    
-    on 2017-08-21
-  </p>
-  <p>I have been working on this project sporadically. I work on it a day or two, then forget about it, and then come back again in another two to three weeks. Right now, I'm trying to give this site somewhat decent look, but holy mother of god, it's such a pain in the ass to do the work of a designer when you've never done design work.  I just don't want it to look it super ugly: if it doesn't get me hired that's fine, but I don't want it to repel the visitors.</p>
-<p>I'm using bootstrap, and added Font Awesome, which has a very cool collection of icons. I also added bootstrap-social to give the social media buttons a polished look. I'm looking into Material Design and Color Theory stuff right now to see if there's anything I can learn from, and add that here.</p>
-
-  </div>
-
-  
-    
-  <div class="blog-post">
-  
-    <h2><a href="/blog/first-post/">Hello Lektor</a></h2>
-  
-  <p class="meta">
-    written by
-    
-      <a href="https://twitter.com/shaownism">Sirajus Salekin</a>
-    
-    on 2017-06-04
-  </p>
-  <p>This is the first blog post I'm ever making with Lektor. I plan to document as I learn more about this static website generator tool. I was looking to start an actual blog, but I haven't yet had the chance to do so. Finally, I thought this could be a good time to start now that I have the summer break. Moving on, the reason I choose Lektor over Wordpress or Jekyll is that it stays right in the middle. I don't know how much my blog will grow in terms of size, traffic hits, so spending money and a lot of effort getting a Wordpress site up and running seemed overkill. On the other hand, choosing tools Jekyll and Github Pages seemed a bit too simple-ish, as  I might want to add some dynamic features to this blog in future. Lektor seemed to be a nice middle groud.</p>
-<p>One other thing that I really liked about Lektor is it uses plain text files as a database. It makes sense for the work I'm doing: little to no need for a heavy database. I think it's really cool and brilliant! I will document what I leanr along the way, and I'm pretty excited for what lies ahead!</p>
-
-  </div>
-
-  
-    
-  <div class="blog-post">
-  
     <h2><a href="/blog/last-semester-of-college/">Last Semester of College</a></h2>
   
   <p class="meta">
@@ -147,6 +90,121 @@ would be a more satisfied person at an old age if they focus on experiences inst
 And I definitely have a ton of experience here that I can cherish when I'm old and gray. 
 Now, the only thing I want is to get out of here, get a job, and start living like an adult in the real world.
 See you there, pal.</p>
+
+  </div>
+
+  
+    
+  <div class="blog-post">
+  
+    <h2><a href="/blog/automotive-grade-linux-with-raspberry-pi/">Automotive Grade Linux with Raspberry Pi</a></h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/sirsalekin">Sirajus Salekin</a>
+    
+    on 2017-01-09
+  </p>
+  <h1>Automotive Grade Linux with Raspberry Pi</h1>
+<p>A custom car stereo system built using Raspberry Pi with Automotive Grade Linux (AGL) as the
+operating system.</p>
+<h2>Background</h2>
+<p>I had my first car two months ago, and it's a classic beater: Chevy Cavalier. It comes with a stock
+radio and perhaps CD player, but that's about it. So I planned on adding an onboard computer
+for navigation and entertainment. I bought a Raspberry Pi model 3 B, and I will document my
+journey as I install a custom stereo to my old beater.</p>
+<h2>Materials</h2>
+<p>So far I gathered the following things:</p>
+<ul>
+<li>Raspberry Pi Model 3 B</li>
+<li>MicroSD card to burn the OS image to</li>
+<li>USB Keyboard </li>
+</ul>
+<p>I'm going to need some electrical stuff as well, and I will add to the following list:</p>
+<ul>
+<li>OBD-II cable </li>
+<li>Power Adapter 2.5A</li>
+<li>Amplifier cable</li>
+<li>[TBD]</li>
+</ul>
+<h2>Resources</h2>
+<p>A quick google search shows that there are quite a few car projects based on Raspberry Pi's out
+there, but not a lot of them uses Automotive Grade Linux as their OS. Most tend to go with 
+standard Raspbian (based on Debian) OS's.</p>
+<p>I gathered a few online resources, and I will primarily follow them to get my project going.</p>
+<ol>
+<li><a href="https://wiki.automotivelinux.org/agl-distro/agl-raspberrypi">Automotive Grade Linux Wiki on Raspberry Pi</a></li>
+<li><a href="https://www.raspberrypi.org/documentation/installation/installing-images/">Raspberry Pi doc on installing system images</a></li>
+</ol>
+<h2>Workflow</h2>
+<p>Since I'm pretty busy during the weekdays, I will probably not be able to finish it within a short
+period of time. From a realistic point of view, this is how I want to go about the project:</p>
+<ol>
+<li>Get the Pi running with AGL</li>
+<li>Test the system without completely mounting on the car</li>
+<li>Remove the old stereo</li>
+<li>Install the Pi on the car dash</li>
+</ol>
+<h2>Worklog</h2>
+<h2>Errors and Troubleshooting</h2>
+
+  </div>
+
+  
+    
+  <div class="blog-post">
+  
+    <h2><a href="/blog/first-post/">Hello Lektor</a></h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/shaownism">Sirajus Salekin</a>
+    
+    on 2017-06-04
+  </p>
+  <p>This is the first blog post I'm ever making with Lektor. I plan to document as I learn more about this static website generator tool. I was looking to start an actual blog, but I haven't yet had the chance to do so. Finally, I thought this could be a good time to start now that I have the summer break. Moving on, the reason I choose Lektor over Wordpress or Jekyll is that it stays right in the middle. I don't know how much my blog will grow in terms of size, traffic hits, so spending money and a lot of effort getting a Wordpress site up and running seemed overkill. On the other hand, choosing tools Jekyll and Github Pages seemed a bit too simple-ish, as  I might want to add some dynamic features to this blog in future. Lektor seemed to be a nice middle groud.</p>
+<p>One other thing that I really liked about Lektor is it uses plain text files as a database. It makes sense for the work I'm doing: little to no need for a heavy database. I think it's really cool and brilliant! I will document what I leanr along the way, and I'm pretty excited for what lies ahead!</p>
+
+  </div>
+
+  
+    
+  <div class="blog-post">
+  
+    <h2><a href="/blog/portfoilo-in-progress/">Portfoilo in Progress</a></h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/sirsalekin">Sirajus Salekin</a>
+    
+    on 2017-08-21
+  </p>
+  <p>I have been working on this project sporadically. I work on it a day or two, then forget about it, and then come back again in another two to three weeks. Right now, I'm trying to give this site somewhat decent look, but holy mother of god, it's such a pain in the ass to do the work of a designer when you've never done design work.  I just don't want it to look it super ugly: if it doesn't get me hired that's fine, but I don't want it to repel the visitors.</p>
+<p>I'm using bootstrap, and added Font Awesome, which has a very cool collection of icons. I also added bootstrap-social to give the social media buttons a polished look. I'm looking into Material Design and Color Theory stuff right now to see if there's anything I can learn from, and add that here.</p>
+
+  </div>
+
+  
+    
+  <div class="blog-post">
+  
+    <h2><a href="/blog/mixing-of-markdown-and-html/">Markdown and HTML codes mixed</a></h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/sirsalekin">Sirajus Salekin</a>
+    
+    on 2017-11-17
+  </p>
+  <p>When I was trying to build the basic version of this site, I got stuck particularly on the front page. I just thought of making it look pretty neat so I wanted to basically write raw HTML in the <code>contents.lr</code> file. (Context: in lektor CMS, the idea is basically put the data in a UTF-8 encoded text file, with <code>.lr</code> extension, model it according to the model provided which basically describes what fields and data types a page is gonna have, and finally render with template file that has <code>.html</code> extension.)</p>
+<p>However, I could not really get this damn page to render correctly. I was adding HTML divs, and trying to use Bootstrap columns etc etc. The first part of it was rendering fine as HTML, but the second part was rendering as <code> code </code> and giving me basically the raw HTML. I was stuck at that for 
+a month. I just was not able to put together enough time to sort through the mix of Bootstrap, my added CSS on top, Python, and lektor's own way of doing things. But this finally came to an end tonight, as I finally got a night not grinding myself for yet another deadline and drowning in coffee.</p>
+<p>Long story short: I was trying to render raw HTML where my page model says markdown is going to be rendered in the body. But it took me a while: pinning down the problem into the exact domain is one of the more difficult parts of problem-solving, but as I have seen before, using simple tools to identify changes goes a long way. <code>print</code> has been my best friend ever since I have been writing Python. I haven't found something similar to <code>print</code> for CSS, but adding a background color to pinpoint this <code>div</code> tag and adding some text within helped me thus far. Along the way, I gained a tremendous amount of admiration for front-end developers: it's a pain in the butt to debug in your world. Ah, the final moral of the story: make the documentation reading count. Like read it slowly enough that you are not assuming you understand this framework when you don't.</p>
+<p>"Testing Changes"</p>
 
   </div>
 
