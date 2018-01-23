@@ -1,0 +1,50 @@
+title: Automotive Grade Linux with Raspberry Pi
+---
+author: Sirajus Salekin
+---
+body:
+
+# Automotive Grade Linux with Raspberry Pi
+A custom car stereo system built using Raspberry Pi with Automotive Grade Linux (AGL) as the
+operating system.
+## Background
+I had my first car two months ago, and it's a classic beater: Chevy Cavalier. It comes with a stock
+radio and perhaps CD player, but that's about it. So I planned on adding an onboard computer
+for navigation and entertainment. I bought a Raspberry Pi model 3 B, and I will document my
+journey as I install a custom stereo to my old beater.
+## Materials
+So far I gathered the following things:
+* Raspberry Pi Model 3 B
+* MicroSD card to burn the OS image to
+* USB Keyboard 
+
+I'm going to need some electrical stuff as well, and I will add to the following list:
+* OBD-II cable 
+* Power Adapter 2.5A
+* Amplifier cable
+* [TBD]
+
+## Resources
+A quick google search shows that there are quite a few car projects based on Raspberry Pi's out
+there, but not a lot of them uses Automotive Grade Linux as their OS. Most tend to go with 
+standard Raspbian (based on Debian) OS's.
+
+I gathered a few online resources, and I will primarily follow them to get my project going.
+1. [Automotive Grade Linux Wiki on Raspberry Pi](https://wiki.automotivelinux.org/agl-distro/agl-raspberrypi)
+2. [Raspberry Pi doc on installing system images](https://www.raspberrypi.org/documentation/installation/installing-images/)
+
+## Workflow 
+Since I'm pretty busy during the weekdays, I will probably not be able to finish it within a short
+period of time. From a realistic point of view, this is how I want to go about the project:
+1. Get the Pi running with AGL
+2. Test the system without completely mounting on the car
+3. Remove the old stereo
+4. Install the Pi on the car dash
+
+## Worklog
+
+## Errors and Troubleshooting 
+---
+pub_date: 2017-01-09
+---
+twitter_handle: sirsalekin
