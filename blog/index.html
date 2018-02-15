@@ -64,24 +64,6 @@
     
   <div class="blog-post">
   
-    <h2><a href="/blog/getting-started-with-unittest-is-python/">Getting Started with unittest is Python</a></h2>
-  
-  <p class="meta">
-    written by
-    
-      
-    
-    on 
-  </p>
-  
-  </div>
-
-    <a href="/blog/getting-started-with-unittest-is-python/">Continue</a>
-    <hr>
-  
-    
-  <div class="blog-post">
-  
     <h2><a href="/blog/last-semester-of-college/">Last Semester of College</a></h2>
   
   <p class="meta">
@@ -235,6 +217,175 @@ a month. I just was not able to put together enough time to sort through the mix
   </div>
 
     <a href="/blog/mixing-of-markdown-and-html/">Continue</a>
+    <hr>
+  
+    
+  <div class="blog-post">
+  
+    <h2><a href="/blog/getting-started-with-unittest-is-python/">Getting Started with unittest is Python</a></h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/sirsalekin">Sirajus Salekin</a>
+    
+    on 2018-02-15
+  </p>
+  <p>I have a confession to make first: I should have started using unittests more seriously a while ago. Sure, I would use a something like a <code>tmp.py</code> and test the script with a bunch of different inputs and make sure they all work. But this does not make sure you take care of all--or at least the critical ones--and don't break the program trying to fix another bug. Anyway, I encountered a bunch of problems while trying to get started with unittesting. And there weren't many examples out there that I could follow: most of them either are too simplistic, or too complex. So I thought I would write a post on this for someone in my shoes who might find this useful.</p>
+<p>Unit testing is basically testing the small components of a system (e.g, a function) in isolation, so it does not test how the components fit together (for that, look into <a href="https://en.wikipedia.org/wiki/Integration_testing">integration testing</a>).</p>
+<p>Anyway, I needed to test a class and the methods, and after some googling, I could not find many examples or resources that go beyond testing a simple function such as <code>is_prime()</code>. But I needed something a bit more complex. This is how my class looked like:</p>
+<pre><code class="lang-python">class Board(object):
+
+    def __init__(self, list2d):
+        self.board = list2d
+        self.playerO = &#39;O&#39;
+        self.playerX = &#39;X&#39;
+
+    def is_valid(self, src, dst):
+        &#39;&#39;&#39;Checking to see if it&#39;s possible to move from src to dst.&#39;&#39;&#39;
+        try:
+            (x,y) = src
+            (a,b) = dst
+            srcSym = self.get_sym(src)
+            dstSym = self.get_sym(dst)
+            .
+            .
+            .
+            if dstSym == srcSym:
+                print(&quot;&quot;)
+                return False
+                 else:
+                return True
+        except IndexError as e:
+            print (&quot;out of the board {0} {1}&quot;.format(dst, e))
+            return False
+
+    def get_sym(self, position):
+        try:
+            (x, y) = position
+            .
+            .
+            .
+        except IndexError:
+            return None
+
+    def get_direction(self, posit):
+        pass
+
+    def get_moves(self, posit):
+        try:
+            (x,y) = posit
+            direction = self.get_direction(posit)
+            all_moves = []
+            valid_moves = []
+             .
+             .
+             .
+            return valid_moves
+        except TypeError:
+            print(&quot;Invalid position, TypeError raised.&quot;)
+            return []
+
+
+    def move_forward(self, posit):
+        # identify the destination
+        # validate move
+        # return success or failure
+        pass
+
+    def move_dright(self, posit):
+        pass
+
+    def move_dleft(self, posit):
+        pass
+</code></pre>
+<p>Don't worry about understanding all the methods (plus I omitted part of the code, to keep things short and simple). To test these methods, I needed to initialize some data structure,i.e., two-dimensional lists, so I can use them for all the methods. So first things first, import the <code>unittest</code> module. It comes with standard python installations. Then you create a class by subclassing <code>unittest.TestCase</code>.  Finally, you call the <code>unittest.main()</code> under the <code>if __name__=='__main__':</code> . So I came up with the following initially.:</p>
+<pre><code class="lang-python">import unittest
+from transition import Board
+
+class TestBoardMethods(unittest.TestCase):
+
+    def __init__(self):
+        self.threeX3List = [[&#39;x&#39;,&#39;x&#39;,&#39;x&#39;],
+                            [&#39;.&#39;,&#39;.&#39;,&#39;.&#39;],
+                            [&#39;o&#39;,&#39;o&#39;, &#39;o&#39;],
+                            ]
+        self.threeX3Board = Board(self.threeX3List
+
+    def test_is_valid_false(self):
+        pairs_false = [[(0,0),(0,0)],    # False, src = dst
+                        [(0,0),(0,2)],   # False, two units, same row
+                        [(0,0),(-1,0)],  # False, out of index
+                        [(0,0),(0,1)],   # False, same row
+                        [(0,0),(1,-1)],  # False, out of index
+                        [(0,0),(1,2)],   # False, moving two units
+                        [(0,0),(2,0)],   # False, moving two units
+                        [(0,0),(2,2)],   # False, moving two units
+                        [(0,0),(11,11)]  # False, out of index
+                        ]
+        for pair in pairs_false:
+            with self.subTest(pair=pair):
+                self.assertIs(self.threeX3Board.is_valid(pair[0],pair[1]), False)
+
+if __name__ == &#39;__main__&#39;:
+    unittest.main()
+</code></pre>
+<p>This gave me an error:</p>
+<pre><code>TypeError: __init__() takes 1 positional argument but 2 were given
+</code></pre>
+<p>So turns out having a <code>__init__</code> method is not a good way to go. I later figured out that the <code>unittest</code>
+has these methods called <code>setUp</code> and <code>tearDown</code> methods for such cases. So I turned the script
+into the following:</p>
+<pre><code class="lang-python">import unittest
+from transition import Board
+
+class TestBoardMethods(unittest.TestCase):
+
+    def setUp(self):
+        self.threeX3List = [[&#39;x&#39;,&#39;x&#39;,&#39;x&#39;],
+                            [&#39;.&#39;,&#39;.&#39;,&#39;.&#39;],
+                            [&#39;o&#39;,&#39;o&#39;, &#39;o&#39;],
+                            ]
+        self.threeX3Board = Board(self.threeX3List)
+
+    def tearDown(self):
+        pass
+
+    def test_is_valid_false(self):
+        pairs_false = [[(0,0),(0,0)],    # False, src = dst
+                        [(0,0),(0,2)],   # False, two units, same row
+                        [(0,0),(-1,0)],  # False, out of index
+                        [(0,0),(0,1)],   # False, same row
+                        [(0,0),(1,-1)],  # False, out of index
+                        [(0,0),(1,2)],   # False, moving two units
+                        [(0,0),(2,0)],   # False, moving two units
+                        [(0,0),(2,2)],   # False, moving two units
+                        [(0,0),(11,11)]  # False, out of index
+                        ]
+        for pair in pairs_false:
+            with self.subTest(pair=pair):
+                self.assertIs(self.threeX3Board.is_valid(pair[0],pair[1]), False)
+
+if __name__ == &#39;__main__&#39;:
+    unittest.main()
+</code></pre>
+<p>Before a test is run, the unittest method runs the <code>setUp</code> method. After it is done running a test, <code>unittest</code>
+runs the <code>tearDown</code> method. In my case, <code>tearDown</code> wasn't super useful, but it is a very useful method when
+it comes to things like closing a connection or a port.</p>
+<p>When I thought about writing this post, my goal was to help you waste less time trying to find a code
+example to get started with. So I'm going to basically list things that I learned while using the <code>unittest</code> module.
+Hope someone finds this useful.</p>
+<ul>
+<li>To test if some value is exactly<code>False</code> or <code>True</code>, use <code>AssertIs(val, False)</code> instead of <code>AssertFalse</code> or <code>AssertTrue</code>. This is explained well <a href="http://jamescooke.info/python-unittest-asserttrue-is-truthy-assertfalse-is-falsy.html">here</a>.</li>
+<li>Use  <code>subTest</code> when running a bunch of assertion off a list. It shows exactly for which item did the test fail.</li>
+<li>On the same note as above, use highly descriptive names for each test.</li>
+</ul>
+<p>That's all I could think of right now, in terms of the difficulties I had using this library. If I remember more, I will
+add them here. A bunch of great pieces of advice are posted <a href="http://docs.python-guide.org/en/latest/writing/tests/">here</a> on unittesting.</p>
+
+  </div>
+
+    <a href="/blog/getting-started-with-unittest-is-python/">Continue</a>
     <hr>
   
 
