@@ -8,3 +8,18 @@ This is my Senior Capstone Project as a CS major. The result is an
 application layer protocol for IoT devices. 
 
 Clone it [here](https://github.com/salekinsirajus/DIPP "Repo at GitHub")
+
+### Maximize High-Performance Computing Resource on MD simulation
+
+This is a computation bio-physics project that seeks to provide a pathway
+between B-DNA to ZII-DNA. Implemented an algorithm called *Sliding Window*
+with Python and bash, which runs molecular dynamics simulations.
+
+Abstract published on the [*BioPhysical
+Journal*](goo.gl/EcZc6z)
+
+### Static Blog Site using Lektor
+
+The one you are looking at. The code is hosted on
+[github](https://github.com/salekinsirajus/personal_site)
+

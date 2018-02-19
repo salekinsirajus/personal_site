@@ -4,7 +4,6 @@ author: Sirajus Salekin
 ---
 body:
 
-# Automotive Grade Linux with Raspberry Pi
 A custom car stereo system built using Raspberry Pi with Automotive Grade Linux (AGL) as the
 operating system.
 ## Background

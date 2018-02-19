@@ -26,11 +26,21 @@ a:active{
 
 /* non-body large texts should be thin all accross*/
 #ultra_big{
-    font-weight: 100;
-    font-size: 3em;
+    font-weight: 800;
+    font-size: 28rem;
     font-family: sans-serif;
-    color: #607686;
+    color: #42d6499c;
 }
+
+/*intro to website, next to thw ultra big heading*/
+#intro{
+
+    font-weight: 200;
+    font-size: 5rem;
+    font-family: monospace;
+    color: #565454f7;
+}
+
 
 /*styles for making the main text readable*/
 #text_body{
