@@ -37,7 +37,7 @@
                             ['/projects', 'Projects'],
                             ['/about', 'About']
                             ] %}
-                        <li{% if this.is_child_of(href) %} class="active"{% endif
+                        <li{% if this.is_child_of(href) %} class=""{% endif
                             %}><a href="{{ href|url }}">{{ title }}</a></li>
                             {% endfor %}
                         </ul>
@@ -104,8 +104,8 @@
         </div>
 
         <div class="col-sm-5">
+            <!-- Add stuff later -->
             <h5 class="">CONTACT</h5>
-            Add an email form.
             
         </div>
     </div>
