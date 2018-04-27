@@ -49,6 +49,15 @@ a:active{
     font-size: 1.2em;
     font-family: serif;
     min-height: 87vh;    
+
+    /*testing with increasing spacing*/
+    /*line-height: 1.85em;*/
+}
+
+/*Before we can implement this, we need to fix the hompage*/
+/*Trying to select the child of the above class*/
+#text_body p {
+    /*padding-bottom: 1.10em;*/
 }
 
 /*fixing the next and previous navigation on blog post*/
