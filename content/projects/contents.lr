@@ -2,24 +2,38 @@ title: Projects
 ---
 body:
 
+### Serverless REST API
+
+Tinkered with AWS services to implement a simple API that stores and retrieves
+JIRA tickets. Used the [sereverless](https://serverless.com) framework. Other
+tools include: AWS Lambda, DynamoDB, AWS API Gateway. Source code:
+[here](https://github.com/salekinsirajus/tickets)
+
+----
+
 ### DIPP - Decentralized IoT Peer-to-Peer Protocol
 
 This is my Senior Capstone Project as a CS major. The result is an
-application layer protocol for IoT devices. 
+application layer protocol for IoT devices. I also wrote an implementation
+in Python. It works on an Arduino Yun device (tested). I plan on extending this
+implementation in C in near future, and conduct some analysis.
 
 Clone it [here](https://github.com/salekinsirajus/DIPP "Repo at GitHub")
 
-### Maximize High-Performance Computing Resource on MD simulation
+----
 
-This is a computation bio-physics project that seeks to provide a pathway
-between B-DNA to ZII-DNA. Implemented an algorithm called *Sliding Window*
+### Maximizing High-Performance Computing Resource on MD simulation
+
+This is a computational bio-physics project that seeks to provide a pathway
+between B-DNA to ZII-DNA. Implemented an algorithm called `Sliding Window`
 with Python and bash, which runs molecular dynamics simulations.
 
-Abstract published on the [*BioPhysical
-Journal*](goo.gl/EcZc6z)
+Abstract published on the [*BioPhysical Journal*](http://goo.gl/EcZc6z)
 
-### Static Blog Site using Lektor
+----
 
-The one you are looking at. The code is hosted on
+### Static Blog Site 
+
+Using Lektor as the CMS. Bootstrap for frontend. The code is hosted on
 [github](https://github.com/salekinsirajus/personal_site)
 
