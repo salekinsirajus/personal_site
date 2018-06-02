@@ -67,12 +67,15 @@
     <h2>Markdown and HTML codes mixed</h2>
   
   <p class="meta">
-    written by
+    By
     
       <a href="https://twitter.com/sirsalekin">Sirajus Salekin</a>
     
-    on 2017-11-17
+    on November 17, 2017
   </p>
+
+  <hr>
+
   <p>When I was trying to build the basic version of this site, I got stuck particularly on the front page. I just thought of making it look pretty neat so I wanted to basically write raw HTML in the <code>contents.lr</code> file. (Context: in lektor CMS, the idea is basically put the data in a UTF-8 encoded text file, with <code>.lr</code> extension, model it according to the model provided which basically describes what fields and data types a page is gonna have, and finally render with template file that has <code>.html</code> extension.)</p>
 <p>However, I could not really get this damn page to render correctly. I was adding HTML divs, and trying to use Bootstrap columns etc etc. The first part of it was rendering fine as HTML, but the second part was rendering as <code> code </code> and giving me basically the raw HTML. I was stuck at that for 
 a month. I just was not able to put together enough time to sort through the mix of Bootstrap, my added CSS on top, Python, and lektor's own way of doing things. But this finally came to an end tonight, as I finally got a night not grinding myself for yet another deadline and drowning in coffee.</p>
@@ -143,42 +146,31 @@ a month. I just was not able to put together enough time to sort through the mix
         </div>
     </div>
     <!-- find a better way to align the rows instead of fixing it to the bottom -->
-    <div class="footer row navbar">
+    <div class="footer row">
         <hr></hr>
-        <div class ="col-sm-5"> 
+
+        <div class="col-sm text-center">
+            <div class="">
+                
+                <a href="https://www.linkedin..com/in/sisalekin">
+                    <i class="fab fa-linkedin fa-3x" aria-hidden="true"></i>
+                </a>
+                <a href="https://twitter.com/sirsalekin">
+                    <i class="fab fa-twitter fa-3x" aria-hidden="true"></i>
+                </a>
+                <a href="https://github.com/salekinsirajus">
+                    <i class="fab fa-github fa-3x" aria-hidden="true"></i>
+                </a>
+
+                <a href="https://stackoverflow.com/users/8093812/sirajus-salekin">
+                    <i class="fab fa-stack-overflow fa-3x" aria-hidden="true"></i>
+                </a>
+                <a href="https://www.flickr.com/people/156070616@N07/">
+                    <i class="fab fa-flickr fa-3x" aria-hidden="true"></i>
+                </a>
+
+            </div>
         </div>
 
-        <div class="col-sm-2">
-            
-            <a href="https://www.linkedin..com/in/sisalekin">
-                <i class="fab fa-linkedin fa-4x" aria-hidden="true"></i>
-            </a>
-            <a href="https://twitter.com/sirsalekin">
-                <i class="fab fa-twitter fa-4x" aria-hidden="true"></i>
-            </a>
-            <a href="https://github.com/salekinsirajus">
-                <i class="fab fa-github fa-4x" aria-hidden="true"></i>
-            </a>
-
-            <a href="https://stackoverflow.com/users/8093812/sirajus-salekin">
-                <i class="fab fa-stack-overflow fa-4x" aria-hidden="true"></i>
-            </a>
-            <a href="https://www.flickr.com/people/156070616@N07/">
-                <i class="fab fa-flickr fa-4x" aria-hidden="true"></i>
-            </a>
-
-            <!-- old style, in case I need reference
-            <a class="btn btn-block  btn-social btn-github" 
-               href="https://github.com/salekinsirajus"
-                >
-                <span class="fa fa-github fa-4x" aria-hidden="true"></span>
-                Checkout GitHub repos
-            </a>
-            -->
-        </div>
-
-        <div class="col-sm-5">
-            <!-- Add stuff later --> 
-        </div>
     </div>
 </body>

@@ -1,0 +1,118 @@
+/*
+*
+This stylesheet contains the landing_page style.
+The container class spans the entire viewport
+*
+*/
+
+/*
+*
+Top level styles: encompasses the whole viewport
+*
+*/
+.container-fluid {
+    height: 100vh;
+    width: 100vw;
+}
+
+.primary-bg {
+    /*background-color: #6FABE0F2;*/
+    background-color: black;
+}
+
+.secondary-bg {
+    background-color: white;
+}
+
+/*
+*
+Secondary-level style: flexbox containers
+*
+*/
+.centered-content {
+    display: inline-flex;
+    flex-direction: column;
+    
+    position: relative;
+    top: 40vh;
+}
+
+.bottom {
+    align-self:flex-end;
+    bottom: -15vh;
+}
+
+
+/*
+*
+Tertiary-level style: flexbox children
+*
+*/
+
+.section {
+    left: 5vw;
+    position: relative; 
+}
+
+
+/*
+*
+Ternary-level style: smallest items
+*
+*/
+
+heading {
+    font-size: 10.0rem;
+    color: white;
+}
+
+subheading {
+    font-size: 5.0rem;
+    color: #f1f0f0;
+}
+
+subsubheading {
+    font-size: 3.0rem;
+    color: white;
+}
+
+.section > .title {
+    font-size: 3.0rem;
+    margin: auto;
+}
+
+.section > .content {
+    width: 15vw;
+    min-width: 200px;
+    font: Helvetica;
+    color: red;
+}
+
+/*
+*
+Media queries for smaller devices
+*
+*/
+@media screen and (max-width: 900px){
+
+    heading {
+        font-size: 4.0rem;
+        color: white;
+    }
+
+    subheading {
+        font-size: 2.7rem;
+    }
+
+    subsubheading {
+        font-size: 2.0rem;
+        top: 10vh;
+    }
+}
+
+/*Not working: at smallest devices, have the text left-aligned */
+@media screen and (max-width: 500px) {
+    .content-box {
+        justify-contents:left;
+    }
+}

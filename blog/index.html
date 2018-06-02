@@ -67,167 +67,22 @@
     <h2><a href="/blog/getting-started-with-unittest-is-python/">Getting Started with unittest in Python</a></h2>
   
   <p class="meta">
-    written by
+    By
     
       <a href="https://twitter.com/sirsalekin">Sirajus Salekin</a>
     
-    on 2018-02-15
+    on February 15, 2018
   </p>
+
+  <hr>
+
   <p>I have a confession to make first: I should have started using unittests more seriously a while ago. Sure, I would use a something like a <code>tmp.py</code> and test the script with a bunch of different inputs and make sure they all work. But this does not make sure you take care of all--or at least the critical ones--and don't break the program trying to fix another bug. Anyway, I encountered a bunch of problems while trying to get started with unittesting. And there weren't many examples out there that I could follow: most of them either are too simplistic, or too complex. So I thought I would write a post on this for someone in my shoes who might find this useful.</p>
-<p>Unit testing is basically testing the small components of a system (e.g, a function) in isolation, so it does not test how the components fit together (for that, look into <a href="https://en.wikipedia.org/wiki/Integration_testing">integration testing</a>).</p>
-<p>Anyway, I needed to test a class and the methods, and after some googling, I could not find many examples or resources that go beyond testing a simple function such as <code>is_prime()</code>. But I needed something a bit more complex. This is how my class looked like:</p>
-<pre><code class="lang-python">class Board(object):
+<p>Unit testing is...
+    <br/>
+    <br/>
 
-    def __init__(self, list2d):
-        self.board = list2d
-        self.playerO = &#39;O&#39;
-        self.playerX = &#39;X&#39;
+    <a href="/blog/getting-started-with-unittest-is-python/">Read More<span>&#8594;</span></a>
 
-    def is_valid(self, src, dst):
-        &#39;&#39;&#39;Checking to see if it&#39;s possible to move from src to dst.&#39;&#39;&#39;
-        try:
-            (x,y) = src
-            (a,b) = dst
-            srcSym = self.get_sym(src)
-            dstSym = self.get_sym(dst)
-            .
-            .
-            .
-            if dstSym == srcSym:
-                print(&quot;&quot;)
-                return False
-                 else:
-                return True
-        except IndexError as e:
-            print (&quot;out of the board {0} {1}&quot;.format(dst, e))
-            return False
-
-    def get_sym(self, position):
-        try:
-            (x, y) = position
-            .
-            .
-            .
-        except IndexError:
-            return None
-
-    def get_direction(self, posit):
-        pass
-
-    def get_moves(self, posit):
-        try:
-            (x,y) = posit
-            direction = self.get_direction(posit)
-            all_moves = []
-            valid_moves = []
-             .
-             .
-             .
-            return valid_moves
-        except TypeError:
-            print(&quot;Invalid position, TypeError raised.&quot;)
-            return []
-
-
-    def move_forward(self, posit):
-        # identify the destination
-        # validate move
-        # return success or failure
-        pass
-
-    def move_dright(self, posit):
-        pass
-
-    def move_dleft(self, posit):
-        pass
-</code></pre>
-<p>Don't worry about understanding all the methods (plus I omitted part of the code, to keep things short and simple). To test these methods, I needed to initialize some data structure,i.e., two-dimensional lists, so I can use them for all the methods. So first things first, import the <code>unittest</code> module. It comes with standard python installations. Then you create a class by subclassing <code>unittest.TestCase</code>.  Finally, you call the <code>unittest.main()</code> under the <code>if __name__=='__main__':</code> . So I came up with the following initially.:</p>
-<pre><code class="lang-python">import unittest
-from transition import Board
-
-class TestBoardMethods(unittest.TestCase):
-
-    def __init__(self):
-        self.threeX3List = [[&#39;x&#39;,&#39;x&#39;,&#39;x&#39;],
-                            [&#39;.&#39;,&#39;.&#39;,&#39;.&#39;],
-                            [&#39;o&#39;,&#39;o&#39;, &#39;o&#39;],
-                            ]
-        self.threeX3Board = Board(self.threeX3List
-
-    def test_is_valid_false(self):
-        pairs_false = [[(0,0),(0,0)],    # False, src = dst
-                        [(0,0),(0,2)],   # False, two units, same row
-                        [(0,0),(-1,0)],  # False, out of index
-                        [(0,0),(0,1)],   # False, same row
-                        [(0,0),(1,-1)],  # False, out of index
-                        [(0,0),(1,2)],   # False, moving two units
-                        [(0,0),(2,0)],   # False, moving two units
-                        [(0,0),(2,2)],   # False, moving two units
-                        [(0,0),(11,11)]  # False, out of index
-                        ]
-        for pair in pairs_false:
-            with self.subTest(pair=pair):
-                self.assertIs(self.threeX3Board.is_valid(pair[0],pair[1]), False)
-
-if __name__ == &#39;__main__&#39;:
-    unittest.main()
-</code></pre>
-<p>This gave me an error:</p>
-<pre><code>TypeError: __init__() takes 1 positional argument but 2 were given
-</code></pre>
-<p>So turns out having a <code>__init__</code> method is not a good way to go. I later figured out that the <code>unittest</code>
-has these methods called <code>setUp</code> and <code>tearDown</code> methods for such cases. So I turned the script
-into the following:</p>
-<pre><code class="lang-python">import unittest
-from transition import Board
-
-class TestBoardMethods(unittest.TestCase):
-
-    def setUp(self):
-        self.threeX3List = [[&#39;x&#39;,&#39;x&#39;,&#39;x&#39;],
-                            [&#39;.&#39;,&#39;.&#39;,&#39;.&#39;],
-                            [&#39;o&#39;,&#39;o&#39;, &#39;o&#39;],
-                            ]
-        self.threeX3Board = Board(self.threeX3List)
-
-    def tearDown(self):
-        pass
-
-    def test_is_valid_false(self):
-        pairs_false = [[(0,0),(0,0)],    # False, src = dst
-                        [(0,0),(0,2)],   # False, two units, same row
-                        [(0,0),(-1,0)],  # False, out of index
-                        [(0,0),(0,1)],   # False, same row
-                        [(0,0),(1,-1)],  # False, out of index
-                        [(0,0),(1,2)],   # False, moving two units
-                        [(0,0),(2,0)],   # False, moving two units
-                        [(0,0),(2,2)],   # False, moving two units
-                        [(0,0),(11,11)]  # False, out of index
-                        ]
-        for pair in pairs_false:
-            with self.subTest(pair=pair):
-                self.assertIs(self.threeX3Board.is_valid(pair[0],pair[1]), False)
-
-if __name__ == &#39;__main__&#39;:
-    unittest.main()
-</code></pre>
-<p>Before a test is run, the unittest method runs the <code>setUp</code> method. After it is done running a test, <code>unittest</code>
-runs the <code>tearDown</code> method. In my case, <code>tearDown</code> wasn't super useful, but it is a very useful method when
-it comes to things like closing a connection or a port.</p>
-<p>When I thought about writing this post, my goal was to help you waste less time trying to find a code
-example to get started with. So I'm going to basically list things that I learned while using the <code>unittest</code> module.
-Hope someone finds this useful.</p>
-<ul>
-<li>To test if some value is exactly<code>False</code> or <code>True</code>, use <code>AssertIs(val, False)</code> instead of <code>AssertFalse</code> or <code>AssertTrue</code>. This is explained well <a href="http://jamescooke.info/python-unittest-asserttrue-is-truthy-assertfalse-is-falsy.html">here</a>.</li>
-<li>Use  <code>subTest</code> when running a bunch of assertion off a list. It shows exactly for which item did the test fail.</li>
-<li>On the same note as above, use highly descriptive names for each test.</li>
-</ul>
-<p>That's all I could think of right now, in terms of the difficulties I had using this library. If I remember more, I will
-add them here. A bunch of great pieces of advice are posted <a href="http://docs.python-guide.org/en/latest/writing/tests/">here</a> on unittesting.</p>
-
-  </div>
-
-    <a href="/blog/getting-started-with-unittest-is-python/">Continue</a>
     <hr>
   
     
@@ -236,20 +91,22 @@ add them here. A bunch of great pieces of advice are posted <a href="http://docs
     <h2><a href="/blog/mixing-of-markdown-and-html/">Markdown and HTML codes mixed</a></h2>
   
   <p class="meta">
-    written by
+    By
     
       <a href="https://twitter.com/sirsalekin">Sirajus Salekin</a>
     
-    on 2017-11-17
+    on November 17, 2017
   </p>
+
+  <hr>
+
   <p>When I was trying to build the basic version of this site, I got stuck particularly on the front page. I just thought of making it look pretty neat so I wanted to basically write raw HTML in the <code>contents.lr</code> file. (Context: in lektor CMS, the idea is basically put the data in a UTF-8 encoded text file, with <code>.lr</code> extension, model it according to the model provided which basically describes what fields and data types a page is gonna have, and finally render with template file that has <code>.html</code> extension.)</p>
-<p>However, I could not really get this damn page to render correctly. I was adding HTML divs, and trying to use Bootstrap columns etc etc. The first part of it was rendering fine as HTML, but the second part was rendering as <code> code </code> and giving me basically the raw HTML. I was stuck at that for 
-a month. I just was not able to put together enough time to sort through the mix of Bootstrap, my added CSS on top, Python, and lektor's own way of doing things. But this finally came to an end tonight, as I finally got a night not grinding myself for yet another deadline and drowning in coffee.</p>
-<p>Long story short: I was trying to render raw HTML where my page model says markdown is going to be rendered in the body. But it took me a while: pinning down the problem into the exact domain is one of the more difficult parts of problem-solving, but as I have seen before, using simple tools to identify changes goes a long way. <code>print</code> has been my best friend ever since I have been writing Python. I haven't found something similar to <code>print</code> for CSS, but adding a background color to pinpoint this <code>div</code> tag and adding some text within helped me thus far. Along the way, I gained a tremendous amount of admiration for front-end developers: it's a pain in the butt to debug in your world. Ah, the final moral of the story: make the documentation reading count. Like read it slowly enough that you are not assuming you understand this framework when you don't.</p>
+<p>However, I could not really get this damn page to render correctly. I was adding HTML divs, and trying to use Bootstrap columns etc etc. The first part of it was rendering...
+    <br/>
+    <br/>
 
-  </div>
+    <a href="/blog/mixing-of-markdown-and-html/">Read More<span>&#8594;</span></a>
 
-    <a href="/blog/mixing-of-markdown-and-html/">Continue</a>
     <hr>
   
     
@@ -258,18 +115,22 @@ a month. I just was not able to put together enough time to sort through the mix
     <h2><a href="/blog/portfoilo-in-progress/">Portfoilo in Progress</a></h2>
   
   <p class="meta">
-    written by
+    By
     
       <a href="https://twitter.com/sirsalekin">Sirajus Salekin</a>
     
-    on 2017-08-21
+    on August 21, 2017
   </p>
+
+  <hr>
+
   <p>I have been working on this project sporadically. I work on it a day or two, then forget about it, and then come back again in another two to three weeks. Right now, I'm trying to give this site somewhat decent look, but holy mother of god, it's such a pain in the ass to do the work of a designer when you've never done design work.  I just don't want it to look it super ugly: if it doesn't get me hired that's fine, but I don't want it to repel the visitors.</p>
-<p>I'm using bootstrap, and added Font Awesome, which has a very cool collection of icons. I also added bootstrap-social to give the social media buttons a polished look. I'm looking into Material Design and Color Theory stuff right now to see if there's anything I can learn from, and add that here.</p>
+<p>I'm using bootstrap, and added Font Awesome, which has a very cool collection of icons. I also added bootstrap-social to give the social media buttons a polished look. I'm looking into Material Design and Color Theory stuff right now to see if there's anything I can...
+    <br/>
+    <br/>
 
-  </div>
+    <a href="/blog/portfoilo-in-progress/">Read More<span>&#8594;</span></a>
 
-    <a href="/blog/portfoilo-in-progress/">Continue</a>
     <hr>
   
     
@@ -278,18 +139,21 @@ a month. I just was not able to put together enough time to sort through the mix
     <h2><a href="/blog/first-post/">Hello Lektor</a></h2>
   
   <p class="meta">
-    written by
+    By
     
       <a href="https://twitter.com/shaownism">Sirajus Salekin</a>
     
-    on 2017-06-04
+    on June 4, 2017
   </p>
-  <p>This is the first blog post I'm ever making with Lektor. I plan to document as I learn more about this static website generator tool. I was looking to start an actual blog, but I haven't yet had the chance to do so. Finally, I thought this could be a good time to start now that I have the summer break. Moving on, the reason I choose Lektor over Wordpress or Jekyll is that it stays right in the middle. I don't know how much my blog will grow in terms of size, traffic hits, so spending money and a lot of effort getting a Wordpress site up and running seemed overkill. On the other hand, choosing tools Jekyll and Github Pages seemed a bit too simple-ish, as  I might want to add some dynamic features to this blog in future. Lektor seemed to be a nice middle groud.</p>
-<p>One other thing that I really liked about Lektor is it uses plain text files as a database. It makes sense for the work I'm doing: little to no need for a heavy database. I think it's really cool and brilliant! I will document what I leanr along the way, and I'm pretty excited for what lies ahead!</p>
 
-  </div>
+  <hr>
 
-    <a href="/blog/first-post/">Continue</a>
+  <p>This is the first blog post I'm ever making with Lektor. I plan to document as I learn more about this static website generator tool. I was looking to start an actual blog, but I haven't yet had the chance to do so. Finally, I thought this could be a good time to start now that I have the summer break. Moving on, the reason I choose Lektor over Wordpress or Jekyll is that it stays right in the middle. I don't know how much my blog will grow in terms of size, traffic hits, so spending money and a lot of effort getting a Wordpress site up and running seemed overkill. On the other hand, choosing tools Jekyll and Github Pages seemed a bit too simple-ish, as  I might want to add some dynamic features to this blog in future. Lektor seemed to be a nice middle...
+    <br/>
+    <br/>
+
+    <a href="/blog/first-post/">Read More<span>&#8594;</span></a>
+
     <hr>
   
     
@@ -298,12 +162,15 @@ a month. I just was not able to put together enough time to sort through the mix
     <h2><a href="/blog/automotive-grade-linux-with-raspberry-pi/">Automotive Grade Linux with Raspberry Pi</a></h2>
   
   <p class="meta">
-    written by
+    By
     
       <a href="https://twitter.com/sirsalekin">Sirajus Salekin</a>
     
-    on 2017-01-09
+    on January 9, 2017
   </p>
+
+  <hr>
+
   <p>A custom car stereo system built using Raspberry Pi with Automotive Grade Linux (AGL) as the
 operating system.</p>
 <h2>Background</h2>
@@ -318,37 +185,12 @@ journey as I install a custom stereo to my old beater.</p>
 <li>MicroSD card to burn the OS image to</li>
 <li>USB Keyboard </li>
 </ul>
-<p>I'm going to need some electrical stuff as well, and I will add to the following list:</p>
-<ul>
-<li>OBD-II cable </li>
-<li>Power Adapter 2.5A</li>
-<li>Amplifier cable</li>
-<li>[TBD]</li>
-</ul>
-<h2>Resources</h2>
-<p>A quick google search shows that there are quite a few car projects based on Raspberry Pi's out
-there, but not a lot of them uses Automotive Grade Linux as their OS. Most tend to go with 
-standard Raspbian (based on Debian) OS's.</p>
-<p>I gathered a few online resources, and I will primarily follow them to get my project going.</p>
-<ol>
-<li><a href="https://wiki.automotivelinux.org/agl-distro/agl-raspberrypi">Automotive Grade Linux Wiki on Raspberry Pi</a></li>
-<li><a href="https://www.raspberrypi.org/documentation/installation/installing-images/">Raspberry Pi doc on installing system images</a></li>
-</ol>
-<h2>Workflow</h2>
-<p>Since I'm pretty busy during the weekdays, I will probably not be able to finish it within a short
-period of time. From a realistic point of view, this is how I want to go about the project:</p>
-<ol>
-<li>Get the Pi running with AGL</li>
-<li>Test the system without completely mounting on the car</li>
-<li>Remove the old stereo</li>
-<li>Install the Pi on the car dash</li>
-</ol>
-<h2>Worklog</h2>
-<h2>Errors and Troubleshooting</h2>
+<p>I'm going to need some electrical...
+    <br/>
+    <br/>
 
-  </div>
+    <a href="/blog/automotive-grade-linux-with-raspberry-pi/">Read More<span>&#8594;</span></a>
 
-    <a href="/blog/automotive-grade-linux-with-raspberry-pi/">Continue</a>
     <hr>
   
     
@@ -357,12 +199,15 @@ period of time. From a realistic point of view, this is how I want to go about t
     <h2><a href="/blog/last-semester-of-college/">Last Semester of College</a></h2>
   
   <p class="meta">
-    written by
+    By
     
       <a href="https://twitter.com/sirsalekin">Sirajus Salekin</a>
     
-    on 2017-01-04
+    on January 4, 2017
   </p>
+
+  <hr>
+
   <p>School starts in a few days, and I will be starting the final semester of my undergraduate degree.
 I came to Earlham about three and a half years ago with eyes full of dreams. Now I'm getting out
 with a more accurate understanding of my abilities, future plans, and a lot of uncertainties. 
@@ -371,19 +216,12 @@ through my junior year as a major so that I could focus more on CS.
 As a result, I will hopefully graduate with a major in Computer Science and a minor in Physics
 in May of 2018.</p>
 <p>Looking at my college experience as a whole, however, I'm bound to say that the vast majority of
-the learning came from outside the classrooms. I learned so much more about life, priorities, goals,
-human relationships, satisfaction--the life exclusive of academia taught me the lion share of lessons.
-Going to college is expensive, even more so--to a private liberal arts school for someone coming from 
-a developing country. 
-But I probably won't regret the financial investment. One of the things I realized was that one
-would be a more satisfied person at an old age if they focus on experiences instead of material possessions.
-And I definitely have a ton of experience here that I can cherish when I'm old and gray. 
-Now, the only thing I want is to get out of here, get a job, and start living like an adult in the real world.
-See you there, pal.</p>
+the learning came from outside the classrooms. I learned so much...
+    <br/>
+    <br/>
 
-  </div>
+    <a href="/blog/last-semester-of-college/">Read More<span>&#8594;</span></a>
 
-    <a href="/blog/last-semester-of-college/">Continue</a>
     <hr>
   
 
@@ -405,42 +243,31 @@ See you there, pal.</p>
         </div>
     </div>
     <!-- find a better way to align the rows instead of fixing it to the bottom -->
-    <div class="footer row navbar">
+    <div class="footer row">
         <hr></hr>
-        <div class ="col-sm-5"> 
+
+        <div class="col-sm text-center">
+            <div class="">
+                
+                <a href="https://www.linkedin..com/in/sisalekin">
+                    <i class="fab fa-linkedin fa-3x" aria-hidden="true"></i>
+                </a>
+                <a href="https://twitter.com/sirsalekin">
+                    <i class="fab fa-twitter fa-3x" aria-hidden="true"></i>
+                </a>
+                <a href="https://github.com/salekinsirajus">
+                    <i class="fab fa-github fa-3x" aria-hidden="true"></i>
+                </a>
+
+                <a href="https://stackoverflow.com/users/8093812/sirajus-salekin">
+                    <i class="fab fa-stack-overflow fa-3x" aria-hidden="true"></i>
+                </a>
+                <a href="https://www.flickr.com/people/156070616@N07/">
+                    <i class="fab fa-flickr fa-3x" aria-hidden="true"></i>
+                </a>
+
+            </div>
         </div>
 
-        <div class="col-sm-2">
-            
-            <a href="https://www.linkedin..com/in/sisalekin">
-                <i class="fab fa-linkedin fa-4x" aria-hidden="true"></i>
-            </a>
-            <a href="https://twitter.com/sirsalekin">
-                <i class="fab fa-twitter fa-4x" aria-hidden="true"></i>
-            </a>
-            <a href="https://github.com/salekinsirajus">
-                <i class="fab fa-github fa-4x" aria-hidden="true"></i>
-            </a>
-
-            <a href="https://stackoverflow.com/users/8093812/sirajus-salekin">
-                <i class="fab fa-stack-overflow fa-4x" aria-hidden="true"></i>
-            </a>
-            <a href="https://www.flickr.com/people/156070616@N07/">
-                <i class="fab fa-flickr fa-4x" aria-hidden="true"></i>
-            </a>
-
-            <!-- old style, in case I need reference
-            <a class="btn btn-block  btn-social btn-github" 
-               href="https://github.com/salekinsirajus"
-                >
-                <span class="fa fa-github fa-4x" aria-hidden="true"></span>
-                Checkout GitHub repos
-            </a>
-            -->
-        </div>
-
-        <div class="col-sm-5">
-            <!-- Add stuff later --> 
-        </div>
     </div>
 </body>
