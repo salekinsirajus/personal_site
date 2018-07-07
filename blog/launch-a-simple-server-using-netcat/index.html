@@ -13,7 +13,7 @@
     <!-- Custom styles on top of bootstrap -->
     <link rel="stylesheet" href="/css/custom_styles.css">
 
-    <title>Hello Lektor — Sirajus Salekin</title>
+    <title>Launch A Simple HTTP Server Using netcat — Sirajus Salekin</title>
 
 </head>
 
@@ -64,20 +64,92 @@
   
   <div class="blog-post">
   
-    <h2>Hello Lektor</h2>
+    <h2>Launch A Simple HTTP Server Using netcat</h2>
   
   <p class="meta">
     By
     
-      <a href="https://twitter.com/shaownism">Sirajus Salekin</a>
+      <a href="https://twitter.com/sirsalekin">Sirajus Salekin</a>
     
-    on June 4, 2017
+    on July 6, 2018
+    
+    
+        Tag(s): Networking, Netcat, Server
+    
   </p>
 
   <hr>
 
-  <p>This is the first blog post I'm ever making with Lektor. I plan to document as I learn more about this static website generator tool. I was looking to start an actual blog, but I haven't yet had the chance to do so. Finally, I thought this could be a good time to start now that I have the summer break. Moving on, the reason I choose Lektor over Wordpress or Jekyll is that it stays right in the middle. I don't know how much my blog will grow in terms of size, traffic hits, so spending money and a lot of effort getting a Wordpress site up and running seemed overkill. On the other hand, choosing tools Jekyll and Github Pages seemed a bit too simple-ish, as  I might want to add some dynamic features to this blog in future. Lektor seemed to be a nice middle groud.</p>
-<p>One other thing that I really liked about Lektor is it uses plain text files as a database. It makes sense for the work I'm doing: little to no need for a heavy database. I think it's really cool and brilliant! I will document what I leanr along the way, and I'm pretty excited for what lies ahead!</p>
+  <p><code>netcat</code> is a quite powerful tool, and it can be used for almost anything under the sun related to TCP/IP
+networking. I needed the simplest web server once to render some HTML and CSS files
+but did not have a way to open those files directly from a browser window.  <code>netcat</code> came very handy,
+and I was surprised how powerful yet simple this tool was.</p>
+<p>If you find yourself in the same situation, you can fire up a simple HTTP server with <code>netcat</code>.
+Here's a little step-by-step guide:</p>
+<ul>
+<li>Make a shell script with whatever commands you want to run when you make request.
+You potentially <strong>could</strong> run a full-blown webserver with this script, but I would not
+recommend it. For example, I wanted to render the result of <code>ifconfig</code> and so this is what 
+the script <code>serve.sh</code> looks like:</li>
+</ul>
+<pre><code>#!/bin/bash
+
+echo "Hello World!\n\n"
+
+echo "parent directory:"
+ls ..
+
+echo "\nNetwork config\n"
+echo "$(ifconfig)
+</code></pre>
+<ul>
+<li>Make sure to set the right execution permission:</li>
+</ul>
+<pre><code>chmod 700 serve.sh
+</code></pre>
+<ul>
+<li>Now, run the following command on terminal. This will start the server</li>
+</ul>
+<pre><code>while true; do { echo -e 'HTTP/1.0 200 OK\r\n'; sh serve.sh; } | nc -l 8080; done
+</code></pre>
+<ul>
+<li>Open your browser and go to <code>localhost:8080</code> as you specified earlier in the command.</li>
+</ul>
+<ul>
+<li>Output on the browser:</li>
+</ul>
+<pre><code>Hello World!
+
+
+parent directory:
+file1
+file2
+dir1
+dir2
+
+Network config
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Global
+          UP LOOPBACK RUNNING  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+wifi0     Link encap:UNSPEC  HWaddr C4-9D-ED-0C-A3-7F-00-00-00-00-00-00-00-00-00-00  
+          inet addr:XXX.XXX.X.X  Bcast:XXX.XXX.X.XXX  Mask:255.255.255.0
+          inet6 addr: fe80::20ee:b3aa:998c:84bc/64 Scope:Global
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+</code></pre>
+<p>This is tested on an Ubuntu machine.</p>
+<h3>Reference</h3>
+<p><a href="https://stackoverflow.com/questions/16640054/minimal-web-server-using-netcat">https://stackoverflow.com/questions/16640054/minimal-web-server-using-netcat</a></p>
 
   </div>
 
@@ -106,14 +178,10 @@
     <hr>
     <ul class="pager">
     
-        <li class="previous"><a href="/blog/portfoilo-in-progress/">
-            Portfoilo in Progress</a>
-        </li>
-    
 
     
-        <li class="next"><a href="/blog/automotive-grade-linux-with-raspberry-pi/">
-            Automotive Grade Linux with Raspberry Pi</a>
+        <li class="next"><a href="/blog/getting-started-with-unittest-is-python/">
+            Getting Started with unittest in Python</a>
         </li>
     
     </ul>
@@ -122,7 +190,7 @@
   <div class="comments"> 
 <div id="disqus_thread"></div>
 <script>
-  var disqus_config = function() { this.page.identifier = "/blog/first-post"; this.page.url = "https://sirajussalekin.com/blog/first-post/"; };
+  var disqus_config = function() { this.page.identifier = "/blog/launch-a-simple-server-using-netcat"; this.page.url = "https://sirajussalekin.com/blog/launch-a-simple-server-using-netcat/"; };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = '//sirajsussalekin.disqus.com/embed.js';
