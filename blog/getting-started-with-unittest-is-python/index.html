@@ -3,6 +3,7 @@
     <meta charset="utf-8"> 
     <meta http-equiv="X-UA_compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
     <!--<link rel="stylesheet" href="/static/style.css"> -->
     <!-- Adding bootstrap stylesheets-->
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
@@ -12,6 +13,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
     <!-- Custom styles on top of bootstrap -->
     <link rel="stylesheet" href="/css/custom_styles.css">
+    <!-- Syntax highlighter for markdown -->
+    <link rel="stylesheet" href="/static/pygments.css">
 
     <title>Getting Started with unittest in Python — Sirajus Salekin</title>
 
@@ -81,141 +84,141 @@
   <p>I have a confession to make first: I should have started using unittests more seriously a while ago. Sure, I would use a something like a <code>tmp.py</code> and test the script with a bunch of different inputs and make sure they all work. But this does not make sure you take care of all--or at least the critical ones--and don't break the program trying to fix another bug. Anyway, I encountered a bunch of problems while trying to get started with unittesting. And there weren't many examples out there that I could follow: most of them either are too simplistic, or too complex. So I thought I would write a post on this for someone in my shoes who might find this useful.</p>
 <p>Unit testing is basically testing the small components of a system (e.g, a function) in isolation, so it does not test how the components fit together (for that, look into <a href="https://en.wikipedia.org/wiki/Integration_testing">integration testing</a>).</p>
 <p>Anyway, I needed to test a class and the methods, and after some googling, I could not find many examples or resources that go beyond testing a simple function such as <code>is_prime()</code>. But I needed something a bit more complex. This is how my class looked like:</p>
-<pre><code class="lang-python">class Board(object):
+<div class="hll"><pre><span></span><span class="k">class</span> <span class="nc">Board</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
-    def __init__(self, list2d):
-        self.board = list2d
-        self.playerO = &#39;O&#39;
-        self.playerX = &#39;X&#39;
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list2d</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">board</span> <span class="o">=</span> <span class="n">list2d</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">playerO</span> <span class="o">=</span> <span class="s1">&#39;O&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">playerX</span> <span class="o">=</span> <span class="s1">&#39;X&#39;</span>
 
-    def is_valid(self, src, dst):
-        &#39;&#39;&#39;Checking to see if it&#39;s possible to move from src to dst.&#39;&#39;&#39;
-        try:
-            (x,y) = src
-            (a,b) = dst
-            srcSym = self.get_sym(src)
-            dstSym = self.get_sym(dst)
-            .
-            .
-            .
-            if dstSym == srcSym:
-                print(&quot;&quot;)
-                return False
-                 else:
-                return True
-        except IndexError as e:
-            print (&quot;out of the board {0} {1}&quot;.format(dst, e))
-            return False
+    <span class="k">def</span> <span class="nf">is_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Checking to see if it&#39;s possible to move from src to dst.&#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">src</span>
+            <span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="n">dst</span>
+            <span class="n">srcSym</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_sym</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+            <span class="n">dstSym</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_sym</span><span class="p">(</span><span class="n">dst</span><span class="p">)</span>
+            <span class="o">.</span>
+            <span class="o">.</span>
+            <span class="o">.</span>
+            <span class="k">if</span> <span class="n">dstSym</span> <span class="o">==</span> <span class="n">srcSym</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">False</span>
+                 <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">except</span> <span class="ne">IndexError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">print</span> <span class="p">(</span><span class="s2">&quot;out of the board {0} {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">False</span>
 
-    def get_sym(self, position):
-        try:
-            (x, y) = position
-            .
-            .
-            .
-        except IndexError:
-            return None
+    <span class="k">def</span> <span class="nf">get_sym</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">position</span>
+            <span class="o">.</span>
+            <span class="o">.</span>
+            <span class="o">.</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
 
-    def get_direction(self, posit):
-        pass
+    <span class="k">def</span> <span class="nf">get_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">posit</span><span class="p">):</span>
+        <span class="k">pass</span>
 
-    def get_moves(self, posit):
-        try:
-            (x,y) = posit
-            direction = self.get_direction(posit)
-            all_moves = []
-            valid_moves = []
-             .
-             .
-             .
-            return valid_moves
-        except TypeError:
-            print(&quot;Invalid position, TypeError raised.&quot;)
-            return []
+    <span class="k">def</span> <span class="nf">get_moves</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">posit</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">posit</span>
+            <span class="n">direction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_direction</span><span class="p">(</span><span class="n">posit</span><span class="p">)</span>
+            <span class="n">all_moves</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">valid_moves</span> <span class="o">=</span> <span class="p">[]</span>
+             <span class="o">.</span>
+             <span class="o">.</span>
+             <span class="o">.</span>
+            <span class="k">return</span> <span class="n">valid_moves</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Invalid position, TypeError raised.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">[]</span>
 
 
-    def move_forward(self, posit):
-        # identify the destination
-        # validate move
-        # return success or failure
-        pass
+    <span class="k">def</span> <span class="nf">move_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">posit</span><span class="p">):</span>
+        <span class="c1"># identify the destination</span>
+        <span class="c1"># validate move</span>
+        <span class="c1"># return success or failure</span>
+        <span class="k">pass</span>
 
-    def move_dright(self, posit):
-        pass
+    <span class="k">def</span> <span class="nf">move_dright</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">posit</span><span class="p">):</span>
+        <span class="k">pass</span>
 
-    def move_dleft(self, posit):
-        pass
-</code></pre>
+    <span class="k">def</span> <span class="nf">move_dleft</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">posit</span><span class="p">):</span>
+        <span class="k">pass</span>
+</pre></div>
 <p>Don't worry about understanding all the methods (plus I omitted part of the code, to keep things short and simple). To test these methods, I needed to initialize some data structure,i.e., two-dimensional lists, so I can use them for all the methods. So first things first, import the <code>unittest</code> module. It comes with standard python installations. Then you create a class by subclassing <code>unittest.TestCase</code>.  Finally, you call the <code>unittest.main()</code> under the <code>if __name__=='__main__':</code> . So I came up with the following initially.:</p>
-<pre><code class="lang-python">import unittest
-from transition import Board
+<div class="hll"><pre><span></span><span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">from</span> <span class="nn">transition</span> <span class="kn">import</span> <span class="n">Board</span>
 
-class TestBoardMethods(unittest.TestCase):
+<span class="k">class</span> <span class="nc">TestBoardMethods</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
 
-    def __init__(self):
-        self.threeX3List = [[&#39;x&#39;,&#39;x&#39;,&#39;x&#39;],
-                            [&#39;.&#39;,&#39;.&#39;,&#39;.&#39;],
-                            [&#39;o&#39;,&#39;o&#39;, &#39;o&#39;],
-                            ]
-        self.threeX3Board = Board(self.threeX3List
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threeX3List</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;x&#39;</span><span class="p">],</span>
+                            <span class="p">[</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">],</span>
+                            <span class="p">[</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">],</span>
+                            <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threeX3Board</span> <span class="o">=</span> <span class="n">Board</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threeX3List</span>
 
-    def test_is_valid_false(self):
-        pairs_false = [[(0,0),(0,0)],    # False, src = dst
-                        [(0,0),(0,2)],   # False, two units, same row
-                        [(0,0),(-1,0)],  # False, out of index
-                        [(0,0),(0,1)],   # False, same row
-                        [(0,0),(1,-1)],  # False, out of index
-                        [(0,0),(1,2)],   # False, moving two units
-                        [(0,0),(2,0)],   # False, moving two units
-                        [(0,0),(2,2)],   # False, moving two units
-                        [(0,0),(11,11)]  # False, out of index
-                        ]
-        for pair in pairs_false:
-            with self.subTest(pair=pair):
-                self.assertIs(self.threeX3Board.is_valid(pair[0],pair[1]), False)
+    <span class="k">def</span> <span class="nf">test_is_valid_false</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">pairs_false</span> <span class="o">=</span> <span class="p">[[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)],</span>    <span class="c1"># False, src = dst</span>
+                        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)],</span>   <span class="c1"># False, two units, same row</span>
+                        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)],</span>  <span class="c1"># False, out of index</span>
+                        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)],</span>   <span class="c1"># False, same row</span>
+                        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)],</span>  <span class="c1"># False, out of index</span>
+                        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)],</span>   <span class="c1"># False, moving two units</span>
+                        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)],</span>   <span class="c1"># False, moving two units</span>
+                        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)],</span>   <span class="c1"># False, moving two units</span>
+                        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">11</span><span class="p">,</span><span class="mi">11</span><span class="p">)]</span>  <span class="c1"># False, out of index</span>
+                        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">pairs_false</span><span class="p">:</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">subTest</span><span class="p">(</span><span class="n">pair</span><span class="o">=</span><span class="n">pair</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertIs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threeX3Board</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="bp">False</span><span class="p">)</span>
 
-if __name__ == &#39;__main__&#39;:
-    unittest.main()
-</code></pre>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
 <p>This gave me an error:</p>
 <pre><code>TypeError: __init__() takes 1 positional argument but 2 were given
 </code></pre>
 <p>So turns out having a <code>__init__</code> method is not a good way to go. I later figured out that the <code>unittest</code>
 has these methods called <code>setUp</code> and <code>tearDown</code> methods for such cases. So I turned the script
 into the following:</p>
-<pre><code class="lang-python">import unittest
-from transition import Board
+<div class="hll"><pre><span></span><span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">from</span> <span class="nn">transition</span> <span class="kn">import</span> <span class="n">Board</span>
 
-class TestBoardMethods(unittest.TestCase):
+<span class="k">class</span> <span class="nc">TestBoardMethods</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
 
-    def setUp(self):
-        self.threeX3List = [[&#39;x&#39;,&#39;x&#39;,&#39;x&#39;],
-                            [&#39;.&#39;,&#39;.&#39;,&#39;.&#39;],
-                            [&#39;o&#39;,&#39;o&#39;, &#39;o&#39;],
-                            ]
-        self.threeX3Board = Board(self.threeX3List)
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threeX3List</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;x&#39;</span><span class="p">],</span>
+                            <span class="p">[</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">],</span>
+                            <span class="p">[</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">],</span>
+                            <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threeX3Board</span> <span class="o">=</span> <span class="n">Board</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threeX3List</span><span class="p">)</span>
 
-    def tearDown(self):
-        pass
+    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
 
-    def test_is_valid_false(self):
-        pairs_false = [[(0,0),(0,0)],    # False, src = dst
-                        [(0,0),(0,2)],   # False, two units, same row
-                        [(0,0),(-1,0)],  # False, out of index
-                        [(0,0),(0,1)],   # False, same row
-                        [(0,0),(1,-1)],  # False, out of index
-                        [(0,0),(1,2)],   # False, moving two units
-                        [(0,0),(2,0)],   # False, moving two units
-                        [(0,0),(2,2)],   # False, moving two units
-                        [(0,0),(11,11)]  # False, out of index
-                        ]
-        for pair in pairs_false:
-            with self.subTest(pair=pair):
-                self.assertIs(self.threeX3Board.is_valid(pair[0],pair[1]), False)
+    <span class="k">def</span> <span class="nf">test_is_valid_false</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">pairs_false</span> <span class="o">=</span> <span class="p">[[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)],</span>    <span class="c1"># False, src = dst</span>
+                        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)],</span>   <span class="c1"># False, two units, same row</span>
+                        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)],</span>  <span class="c1"># False, out of index</span>
+                        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)],</span>   <span class="c1"># False, same row</span>
+                        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)],</span>  <span class="c1"># False, out of index</span>
+                        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)],</span>   <span class="c1"># False, moving two units</span>
+                        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)],</span>   <span class="c1"># False, moving two units</span>
+                        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)],</span>   <span class="c1"># False, moving two units</span>
+                        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">11</span><span class="p">,</span><span class="mi">11</span><span class="p">)]</span>  <span class="c1"># False, out of index</span>
+                        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">pairs_false</span><span class="p">:</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">subTest</span><span class="p">(</span><span class="n">pair</span><span class="o">=</span><span class="n">pair</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertIs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threeX3Board</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="bp">False</span><span class="p">)</span>
 
-if __name__ == &#39;__main__&#39;:
-    unittest.main()
-</code></pre>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
 <p>Before a test is run, the unittest method runs the <code>setUp</code> method. After it is done running a test, <code>unittest</code>
 runs the <code>tearDown</code> method. In my case, <code>tearDown</code> wasn't super useful, but it is a very useful method when
 it comes to things like closing a connection or a port.</p>

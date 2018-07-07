@@ -3,6 +3,7 @@
     <meta charset="utf-8"> 
     <meta http-equiv="X-UA_compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
     <!--<link rel="stylesheet" href="/static/style.css"> -->
     <!-- Adding bootstrap stylesheets-->
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
@@ -12,6 +13,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
     <!-- Custom styles on top of bootstrap -->
     <link rel="stylesheet" href="/css/custom_styles.css">
+    <!-- Syntax highlighter for markdown -->
+    <link rel="stylesheet" href="/static/pygments.css">
 
     <title>Launch A Simple HTTP Server Using netcat — Sirajus Salekin</title>
 
@@ -89,25 +92,25 @@ Here's a little guide for you:</p>
 You potentially <strong>could</strong> run a full-blown webserver with this script, but I would not
 recommend it. For example, I wanted to render the result of <code>ifconfig</code> and so this is what 
 the script <code>serve.sh</code> looks like:</p>
-<pre><code>#!/bin/bash
+<div class="hll"><pre><span></span><span class="ch">#!/bin/bash</span>
 
-echo "Hello World!\n\n"
+<span class="nb">echo</span> <span class="s2">&quot;Hello World!\n\n&quot;</span>
 
-echo "parent directory:"
+<span class="nb">echo</span> <span class="s2">&quot;parent directory:&quot;</span>
 ls ..
 
-echo "\nNetwork config\n"
-echo "$(ifconfig)
-</code></pre>
+<span class="nb">echo</span> <span class="s2">&quot;\nNetwork config\n&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;</span><span class="k">$(</span>ifconfig<span class="k">)</span><span class="s2"></span>
+</pre></div>
 <hr>
 <p>Make sure to set the right execution permission:</p>
-<pre><code>chmod 700 serve.sh
-</code></pre>
+<div class="hll"><pre><span></span>chmod <span class="m">700</span> serve.sh
+</pre></div>
 <ul>
 <li>Now, run the following command on terminal. This will start the server</li>
 </ul>
-<pre><code>while true; do { echo -e 'HTTP/1.0 200 OK\r\n'; sh serve.sh; } | nc -l 8080; done
-</code></pre>
+<div class="hll"><pre><span></span><span class="k">while</span> true<span class="p">;</span> <span class="k">do</span> <span class="o">{</span> <span class="nb">echo</span> -e <span class="s1">&#39;HTTP/1.0 200 OK\r\n&#39;</span><span class="p">;</span> sh serve.sh<span class="p">;</span> <span class="o">}</span> <span class="p">|</span> nc -l <span class="m">8080</span><span class="p">;</span> <span class="k">done</span>
+</pre></div>
 <hr>
 <p>Open your browser and go to <code>localhost:8080</code> as you specified earlier in the command.</p>
 <hr>
