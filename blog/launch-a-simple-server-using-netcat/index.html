@@ -74,8 +74,6 @@
     on July 6, 2018
     
     
-        Tag(s): Networking, Netcat, Server
-    
   </p>
 
   <hr>
@@ -85,13 +83,12 @@ networking. I needed the simplest web server once to render some HTML and CSS fi
 but did not have a way to open those files directly from a browser window.  <code>netcat</code> came very handy,
 and I was surprised how powerful yet simple this tool was.</p>
 <p>If you find yourself in the same situation, you can fire up a simple HTTP server with <code>netcat</code>.
-Here's a little step-by-step guide:</p>
-<ul>
-<li>Make a shell script with whatever commands you want to run when you make request.
+Here's a little guide for you:</p>
+<hr>
+<p>Make a shell script with whatever commands you want to run when you make request.
 You potentially <strong>could</strong> run a full-blown webserver with this script, but I would not
 recommend it. For example, I wanted to render the result of <code>ifconfig</code> and so this is what 
-the script <code>serve.sh</code> looks like:</li>
-</ul>
+the script <code>serve.sh</code> looks like:</p>
 <pre><code>#!/bin/bash
 
 echo "Hello World!\n\n"
@@ -102,9 +99,8 @@ ls ..
 echo "\nNetwork config\n"
 echo "$(ifconfig)
 </code></pre>
-<ul>
-<li>Make sure to set the right execution permission:</li>
-</ul>
+<hr>
+<p>Make sure to set the right execution permission:</p>
 <pre><code>chmod 700 serve.sh
 </code></pre>
 <ul>
@@ -112,12 +108,10 @@ echo "$(ifconfig)
 </ul>
 <pre><code>while true; do { echo -e 'HTTP/1.0 200 OK\r\n'; sh serve.sh; } | nc -l 8080; done
 </code></pre>
-<ul>
-<li>Open your browser and go to <code>localhost:8080</code> as you specified earlier in the command.</li>
-</ul>
-<ul>
-<li>Output on the browser:</li>
-</ul>
+<hr>
+<p>Open your browser and go to <code>localhost:8080</code> as you specified earlier in the command.</p>
+<hr>
+<p>Output on the browser:</p>
 <pre><code>Hello World!
 
 
@@ -148,6 +142,7 @@ wifi0     Link encap:UNSPEC  HWaddr C4-9D-ED-0C-A3-7F-00-00-00-00-00-00-00-00-00
           RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
 </code></pre>
 <p>This is tested on an Ubuntu machine.</p>
+<hr>
 <h3>Reference</h3>
 <p><a href="https://stackoverflow.com/questions/16640054/minimal-web-server-using-netcat">https://stackoverflow.com/questions/16640054/minimal-web-server-using-netcat</a></p>
 
