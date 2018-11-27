@@ -3,6 +3,7 @@
     <meta charset="utf-8"> 
     <meta http-equiv="X-UA_compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
     <!--<link rel="stylesheet" href="{{ '/static/style.css'|url }}"> -->
     <!-- Adding bootstrap stylesheets-->
     <link rel="stylesheet" type="text/css" href="{{'/css/bootstrap.min.css'|url}}">
@@ -12,6 +13,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
     <!-- Custom styles on top of bootstrap -->
     <link rel="stylesheet" href="{{'/css/custom_styles.css'|url}}">
+    <!-- Syntax highlighter for markdown -->
+    <link rel="stylesheet" href="{{ get_pygments_stylesheet()|url }}">
 
     <title>{% block title %}Welcome{% endblock %} — Sirajus Salekin</title>
 
@@ -23,7 +26,7 @@
     <!-- We're gonna try using that as fixed navbar instead -->
     <header class= "row"> <!-- row-->
         <div class="container">
-            <nav class="nav navbar-fixed-top">
+            <nav class="nav navbar-fixed-top" id="top-navigation">
                 <div class="row">
                     <h1 class="text-center" href="{{'/'|url}}">SIRAJUS SALEKIN</h1>
                 </div>
@@ -51,49 +54,38 @@
         <div class ="col-sm-3" >
         </div>
         <div class="col-sm-6" id="text_body">
-            {% block body %} <h1>in the middle </h1> {% endblock %}
+            {% block body %} {% endblock %}
             
         </div>
         <div class="col-sm-3">
         </div>
     </div>
     <!-- find a better way to align the rows instead of fixing it to the bottom -->
-    <div class="footer row navbar">
+    <div class="footer row">
         <hr></hr>
-        <div class ="col-sm-5"> 
+
+        <div class="col-sm text-center">
+            <div class="">
+                
+                <a href="https://www.linkedin.com/in/sisalekin">
+                    <i class="fab fa-linkedin fa-3x" aria-hidden="true"></i>
+                </a>
+                <a href="https://twitter.com/sirsalekin">
+                    <i class="fab fa-twitter fa-3x" aria-hidden="true"></i>
+                </a>
+                <a href="https://github.com/salekinsirajus">
+                    <i class="fab fa-github fa-3x" aria-hidden="true"></i>
+                </a>
+
+                <a href="https://stackoverflow.com/users/8093812/sirajus-salekin">
+                    <i class="fab fa-stack-overflow fa-3x" aria-hidden="true"></i>
+                </a>
+                <a href="https://www.flickr.com/people/156070616@N07/">
+                    <i class="fab fa-flickr fa-3x" aria-hidden="true"></i>
+                </a>
+
+            </div>
         </div>
 
-        <div class="col-sm-2">
-            
-            <a href="https://www.linkedin..com/in/sisalekin">
-                <i class="fab fa-linkedin fa-4x" aria-hidden="true"></i>
-            </a>
-            <a href="https://twitter.com/sirsalekin">
-                <i class="fab fa-twitter fa-4x" aria-hidden="true"></i>
-            </a>
-            <a href="https://github.com/salekinsirajus">
-                <i class="fab fa-github fa-4x" aria-hidden="true"></i>
-            </a>
-
-            <a href="https://stackoverflow.com/users/8093812/sirajus-salekin">
-                <i class="fab fa-stack-overflow fa-4x" aria-hidden="true"></i>
-            </a>
-            <a href="https://www.flickr.com/people/156070616@N07/">
-                <i class="fab fa-flickr fa-4x" aria-hidden="true"></i>
-            </a>
-
-            <!-- old style, in case I need reference
-            <a class="btn btn-block  btn-social btn-github" 
-               href="https://github.com/salekinsirajus"
-                >
-                <span class="fa fa-github fa-4x" aria-hidden="true"></span>
-                Checkout GitHub repos
-            </a>
-            -->
-        </div>
-
-        <div class="col-sm-5">
-            <!-- Add stuff later --> 
-        </div>
     </div>
 </body>

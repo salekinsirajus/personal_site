@@ -1,0 +1,90 @@
+title: Launch A Simple HTTP Server Using netcat
+---
+author: Sirajus Salekin
+---
+body:
+
+`netcat` is a quite powerful tool, and it can be used for almost anything under the sun related to TCP/IP
+networking. I needed the simplest web server once to render some HTML and CSS files
+but did not have a way to open those files directly from a browser window.  `netcat` came very handy,
+and I was surprised how powerful yet simple this tool was.
+
+If you find yourself in the same situation, you can fire up a simple HTTP server with `netcat`.
+Here's a little guide for you:
+
+-----
+Make a shell script with whatever commands you want to run when you make request.
+You potentially **could** run a full-blown webserver with this script, but I would not
+recommend it. For example, I wanted to render the result of `ifconfig` and so this is what 
+the script `serve.sh` looks like:
+
+```shell
+#!/bin/bash
+
+echo "Hello World!\n\n"
+
+echo "parent directory:"
+ls ..
+
+echo "\nNetwork config\n"
+echo "$(ifconfig)
+```
+-----
+Make sure to set the right execution permission:
+
+```shell
+chmod 700 serve.sh
+```
+
+- Now, run the following command on terminal. This will start the server
+
+```shell
+while true; do { echo -e 'HTTP/1.0 200 OK\r\n'; sh serve.sh; } | nc -l 8080; done
+```
+-----
+Open your browser and go to `localhost:8080` as you specified earlier in the command.
+
+-----
+Output on the browser:
+
+```
+Hello World!
+
+
+parent directory:
+file1
+file2
+dir1
+dir2
+
+Network config
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Global
+          UP LOOPBACK RUNNING  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+wifi0     Link encap:UNSPEC  HWaddr C4-9D-ED-0C-A3-7F-00-00-00-00-00-00-00-00-00-00  
+          inet addr:XXX.XXX.X.X  Bcast:XXX.XXX.X.XXX  Mask:255.255.255.0
+          inet6 addr: fe80::20ee:b3aa:998c:84bc/64 Scope:Global
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+```
+This is tested on an Ubuntu machine.
+
+-----
+### Reference
+https://stackoverflow.com/questions/16640054/minimal-web-server-using-netcat
+---
+pub_date: 2018-07-06
+---
+tag: 
+---
+twitter_handle: sirsalekin

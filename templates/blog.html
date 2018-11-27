@@ -4,8 +4,12 @@
 {% block title %}{{ this.title }}{% endblock %}
 {% block body %}
   {% for child in this.pagination.items %}
-    {{ render_blog_post(child, from_index=true) }}
-    <a href="{{ child|url }}">Continue</a>
+    {{ render_blog_post(child, from_index=true) | truncate(1000, False)}}
+    <br/>
+    <br/>
+
+    <a href="{{ child|url }}">Read More<span>&#8594;</span></a>
+
     <hr>
   {% endfor %}
 

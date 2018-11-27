@@ -51,18 +51,26 @@ a:active{
     min-height: 87vh;    
 
     /*testing with increasing spacing*/
-    /*line-height: 1.85em;*/
+    line-height: 1.85em;
 }
 
 /*Before we can implement this, we need to fix the hompage*/
 /*Trying to select the child of the above class*/
 #text_body p {
-    /*padding-bottom: 1.10em;*/
+    padding-bottom: 1.0em;
 }
 
 /*fixing the next and previous navigation on blog post*/
 #next_prev{
     display: inline-block;
+}
+
+#top_navigation{}
+
+@media (max-width: 768px;){
+    #top_navigation{
+        position: static;
+    }
 }
 
 /* Changing navbar background color*/
@@ -96,13 +104,3 @@ set the footer at the bottom of the page
     bottom:0;
 }
 
-/* style for background image in landing page
- using an id selector*/
-#landing-bg{
- width: 100%;
- height: 600px;
- display: table;
- background-image: url('face.jpg'); 
- background-repeat: no-repeat;
- background-position: left;
- }

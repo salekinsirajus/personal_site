@@ -28,7 +28,18 @@ This is a computational bio-physics project that seeks to provide a pathway
 between B-DNA to ZII-DNA. Implemented an algorithm called `Sliding Window`
 with Python and bash, which runs molecular dynamics simulations.
 
-Abstract published on the [*BioPhysical Journal*](http://goo.gl/EcZc6z)
+Abstract published on the [BioPhysical Journal](http://goo.gl/EcZc6z)
+
+----
+
+### Engaging Citizens to Local Government 
+
+Send email updates (daily, weekly, monthly, etc) on bills in your local
+legislature based on the issues you care about. Still in development phase
+(built overnight for a hackathon). Uses Python Flask framework and MongoDB.
+Legislation data pulled from [OpenStates](https://openstates.org) API.
+
+Soruce code: [github](https://github.com/salekinsirajus/Engage-Legislation)
 
 ----
 
@@ -36,4 +47,3 @@ Abstract published on the [*BioPhysical Journal*](http://goo.gl/EcZc6z)
 
 Using Lektor as the CMS. Bootstrap for frontend. The code is hosted on
 [github](https://github.com/salekinsirajus/personal_site)
-

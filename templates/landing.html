@@ -1,65 +1,38 @@
-{% extends "layout.html" %}
-{% block title %}{{ this.title }}{% endblock %}
-{% block body %}
+<!doctype html>
+<head>
+    <meta charset="utf-8"> 
+    <meta http-equiv="X-UA_compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
 
-<div class="container-fluid"> <!-- div for the entire text body -->
-    <div class="row">
-        <div class="col-sm-12">
-    
-            <div class="col-sm-6">
-            </div>
+    <meta name="google-site-verification" 
+        content="bnQaIUy0EsTuzf9Fy4yOiZjKbS-_dnbPKp1duffYEqI" />
 
-            <div class="col-sm-6">
-                <div>
-                    <p class="text-center" id="ultra_big"
-                    >Hi!</p>
-                </div>
-            </div>
+    <link rel="stylesheet" href="{{'/css/bootstrap.min.css'|asseturl}}"> 
+    <link rel="stylesheet" href="{{'/css/landing_page.css'|asseturl}}">
+</head>
 
-
-        </div>
+<body>
+    <div class="ga-script"> {{ generate_google_analytics() }}
     </div>
 
-
-
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="col-sm-6">
+    <div class="container-fluid primary-bg">
+        <div class="centered-content">
+            <div class="section">
+                <heading>Sirajus Salekin</heading>
             </div>
-
-            <div class="col-sm-6">
-                <div>
-                <h2 id="intro"
-                >I am Sirajus Salekin.</h2>
-                <h2 id="intro"
-                >I write code.</h2>
-                </div>
+            <div class="section">
+                <subheading>Tech for Meaningful Change</subheading>
             </div>
-
-        </div>
+            <div class="section bottom">
+                <subsubheading>I develop software
+                and sometimes write what I learn.</subsubheading>
+                <br/>
+                <subsubheading>
+                    <a href="{{ '/about'|url }}">Learn More</a>,
+                    <a href="{{ '/blog'|url }}">Read Blog</a>, or
+                    <a href="{{ '/projects'|url }}">See My Projects</a>
+                </subsubheading>
+            <div>
+        </div> 
     </div>
-
-
-<!--
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="col-sm-6">    
-            </div>
-
-            <div class="col-sm-6">
-                <div>
-                    <h2>
-                        P.S: The development of this site is still
-                        underway. I'm using Lektor and Bootstrap.
-                        If you happen to have any suggestions or tips,
-                        I'd love to hear them! 
-                    </h2>
-                </div>
-            </div>
-
-        </div>
-    </div>
--->
-
-</div>
-{% endblock %}
+</body>
