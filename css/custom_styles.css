@@ -65,6 +65,14 @@ a:active{
     display: inline-block;
 }
 
+#top_navigation{}
+
+@media (max-width: 768px;){
+    #top_navigation{
+        position: static;
+    }
+}
+
 /* Changing navbar background color*/
 .navbar-fixed-top{
     opacity:1.0;
