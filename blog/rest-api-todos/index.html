@@ -16,7 +16,7 @@
     <!-- Syntax highlighter for markdown -->
     <link rel="stylesheet" href="/static/pygments.css">
 
-    <title>Launch A Simple HTTP Server Using netcat — Sirajus Salekin</title>
+    <title>10 Things To Do When Designing REST APIs — Sirajus Salekin</title>
 
 </head>
 
@@ -67,87 +67,83 @@
   
   <div class="blog-post">
   
-    <h2>Launch A Simple HTTP Server Using netcat</h2>
+    <h2>10 Things To Do When Designing REST APIs</h2>
   
   <p class="meta">
     By
     
       <a href="https://twitter.com/sirsalekin">Sirajus Salekin</a>
     
-    on July 6, 2018
+    on November 18, 2019
     
     
   </p>
 
   <hr>
 
-  <p><code>netcat</code> is a quite powerful tool, and it can be used for almost anything under the sun related to TCP/IP
-networking. I needed the simplest web server once to render some HTML and CSS files
-but did not have a way to open those files directly from a browser window.  <code>netcat</code> came very handy,
-and I was surprised how powerful yet simple this tool was.</p>
-<p>If you find yourself in the same situation, you can fire up a simple HTTP server with <code>netcat</code>.
-Here's a little guide for you:</p>
-<hr>
-<p>Make a shell script with whatever commands you want to run when you make request.
-You potentially <strong>could</strong> run a full-blown webserver with this script, but I would not
-recommend it. For example, I wanted to render the result of <code>ifconfig</code> and so this is what 
-the script <code>serve.sh</code> looks like:</p>
-<div class="hll"><pre><span></span><span class="ch">#!/bin/bash</span>
-
-<span class="nb">echo</span> <span class="s2">&quot;Hello World!\n\n&quot;</span>
-
-<span class="nb">echo</span> <span class="s2">&quot;parent directory:&quot;</span>
-ls ..
-
-<span class="nb">echo</span> <span class="s2">&quot;\nNetwork config\n&quot;</span>
-<span class="nb">echo</span> <span class="s2">&quot;</span><span class="k">$(</span>ifconfig<span class="k">)</span><span class="s2"></span>
-</pre></div>
-<hr>
-<p>Make sure to set the right execution permission:</p>
-<div class="hll"><pre><span></span>chmod <span class="m">700</span> serve.sh
-</pre></div>
-<ul>
-<li>Now, run the following command on terminal. This will start the server</li>
-</ul>
-<div class="hll"><pre><span></span><span class="k">while</span> true<span class="p">;</span> <span class="k">do</span> <span class="o">{</span> <span class="nb">echo</span> -e <span class="s1">&#39;HTTP/1.0 200 OK\r\n&#39;</span><span class="p">;</span> sh serve.sh<span class="p">;</span> <span class="o">}</span> <span class="p">|</span> nc -l <span class="m">8080</span><span class="p">;</span> <span class="k">done</span>
-</pre></div>
-<hr>
-<p>Open your browser and go to <code>localhost:8080</code> as you specified earlier in the command.</p>
-<hr>
-<p>Output on the browser:</p>
-<pre><code>Hello World!
-
-
-parent directory:
-file1
-file2
-dir1
-dir2
-
-Network config
-
-lo        Link encap:Local Loopback  
-          inet addr:127.0.0.1  Mask:255.0.0.0
-          inet6 addr: ::1/128 Scope:Global
-          UP LOOPBACK RUNNING  MTU:1500  Metric:1
-          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 
-          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
-
-wifi0     Link encap:UNSPEC  HWaddr C4-9D-ED-0C-A3-7F-00-00-00-00-00-00-00-00-00-00  
-          inet addr:XXX.XXX.X.X  Bcast:XXX.XXX.X.XXX  Mask:255.255.255.0
-          inet6 addr: fe80::20ee:b3aa:998c:84bc/64 Scope:Global
-          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
-          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 
-          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+  <h3>Background</h3>
+<p>For the past one and a half year working as both a developer and a user, I learned a few lessons about the usability of a REST API. There are times I cursed the developer who implemented such a useless mess. Other times I patted myself on the back for coming up with such a brilliant application. So here goes the list of things I should do right the next time around. Note that most of these observations are common sense but easy to forget.</p>
+<h3>The List</h3>
+<ol>
+<li><p>Don’t return everything from one endpoint. What is the point of an endpoint (or any program, for that matter) that does everything?</p>
+</li>
+<li><p>Consider using the <a href="https://swagger.io/docs/specification/about/">OpenAPI</a> specification. It is a well-accepted standard at this point and makes navigating your API quite convenient. It was definitely a blessing when I was doing load tests on the API from not-my-local machine. This is especially true if the API has a non-trivial number of endpoints.
+<img src="/blog/rest-api-todos/swagger_ui.png" alt="interactive_ui"></p>
+</li>
+<li><p>Allow filtering, and let the user know in the docs what are the supported filters for an endpoint. Alternatively, you can publish a metadata endpoint that can list the filters.</p>
+</li>
+<li><p>Allow resource expansion, which is the ability to load related resources. It saves the user multiple round-trips to a remote host. Example:</p>
+<pre><code> GET http://yourapi.com/v1/books/10
+ {
+     "data": {
+         "title": "The Most Popular Book Ever Written",
+         "num_of_page": 1000,
+         "isbn": "9789171942791",
+         "author": "John Smith"
+     } 
+ }
 </code></pre>
-<p>This is tested on an Ubuntu machine.</p>
-<hr>
-<h3>Reference</h3>
-<p><a href="https://stackoverflow.com/questions/16640054/minimal-web-server-using-netcat">https://stackoverflow.com/questions/16640054/minimal-web-server-using-netcat</a></p>
+<p>And <code>expand</code>ed:</p>
+<pre><code> GET http://yourapi.com/v1/books/10?expand=author
+
+ {
+     "data": {
+         "title": "The Most Popular Book Ever Written",
+         "num_of_page": 1000,
+         "isbn": "9789171942791",
+         "author": {
+             "name": "John Smith",
+             "nationality": "American",
+             "books_published": 400,
+             "birth_date": "1945-10-11"
+     }
+ }
+</code></pre>
+</li>
+<li><p>Consider using the API gateway pattern when things start to get more complicated. Maybe you need to talk to multiple microservices before compiling a response, and some of the responses can be parallelized.</p>
+</li>
+<li><p>Allow sorting by different metrics. Or, at least tell the user how the resources are sorted.</p>
+</li>
+<li><p>Send meaningful <code>message</code>s, they are super helpful for a human debugger. It’s like comments for your API.</p>
+</li>
+<li><p>Following up from the last point, take advantage of HTTP status codes. They can be made quite fine grained, and tells a lot to the user when things go wrong. At least avoid doing the following:</p>
+<pre><code> GET http://yourapi.com/v1/usefull_stuff
+ 200 OK
+ {
+     "data": [],
+     "status_code": 200,
+     "message": "0 resources found"
+ }
+</code></pre>
+<p>Do the users a favor and send a <code>404 Not Found</code>.</p>
+</li>
+<li><p>It looks odd when you write a blog post and title it <code>8  Things To Do When Designing REST APIs</code>. Don't do it.</p>
+</li>
+<li><p>Trust people who title their blog post as <code>10  Things To Do When Designing REST APIs</code>.</p>
+</li>
+</ol>
+<h3>Last Words</h3>
+<p>While designing a REST API, more often than not, the UI/UX is not considered at all since the application typically lives behind the scenes. It's still worth putting the effort so that your users don't go nuts. Anyway, that's all I got so far. Let me know your thoughts!</p>
 
   </div>
 
@@ -176,14 +172,10 @@ wifi0     Link encap:UNSPEC  HWaddr C4-9D-ED-0C-A3-7F-00-00-00-00-00-00-00-00-00
     <hr>
     <ul class="pager">
     
-        <li class="previous"><a href="/blog/rest-api-todos/">
-            10 Things To Do When Designing REST APIs</a>
-        </li>
-    
 
     
-        <li class="next"><a href="/blog/getting-started-with-unittest-is-python/">
-            Getting Started with unittest in Python</a>
+        <li class="next"><a href="/blog/launch-a-simple-server-using-netcat/">
+            Launch A Simple HTTP Server Using netcat</a>
         </li>
     
     </ul>
@@ -192,7 +184,7 @@ wifi0     Link encap:UNSPEC  HWaddr C4-9D-ED-0C-A3-7F-00-00-00-00-00-00-00-00-00
   <div class="comments"> 
 <div id="disqus_thread"></div>
 <script>
-  var disqus_config = function() { this.page.identifier = "/blog/launch-a-simple-server-using-netcat"; this.page.url = "https://sirajussalekin.com/blog/launch-a-simple-server-using-netcat/"; };
+  var disqus_config = function() { this.page.identifier = "/blog/rest-api-todos"; this.page.url = "https://sirajussalekin.com/blog/rest-api-todos/"; };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = '//sirajsussalekin.disqus.com/embed.js';
