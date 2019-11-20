@@ -1,0 +1,78 @@
+title: 10 Things To Do When Designing REST APIs
+---
+author: Sirajus Salekin
+---
+body:
+
+### Background
+For the past one and a half year working as both a developer and a user, I learned a few lessons about the usability of a REST API. There are times I cursed the developer who implemented such a useless mess. Other times I patted myself on the back for coming up with such a brilliant application. So here goes the list of things I should do right the next time around. Note that most of these observations are common sense but easy to forget.
+
+### The List
+1. Don’t return everything from one endpoint. What is the point of an endpoint (or any program, for that matter) that does everything?
+
+2. Consider using the [OpenAPI](https://swagger.io/docs/specification/about/) specification. It is a well-accepted standard at this point and makes navigating your API quite convenient. It was definitely a blessing when I was doing load tests on the API from not-my-local machine. This is especially true if the API has a non-trivial number of endpoints.
+![interactive_ui](swagger_ui.png)
+
+3. Allow filtering, and let the user know in the docs what are the supported filters for an endpoint. Alternatively, you can publish a metadata endpoint that can list the filters.
+
+4. Allow resource expansion, which is the ability to load related resources. It saves the user multiple round-trips to a remote host. Example:
+
+    ```
+    GET http://yourapi.com/v1/books/10
+    {
+        "data": {
+            "title": "The Most Popular Book Ever Written",
+            "num_of_page": 1000,
+            "isbn": "9789171942791",
+            "author": "John Smith"
+        } 
+    }
+
+    ```
+   And `expand`ed:
+    ```
+    GET http://yourapi.com/v1/books/10?expand=author
+    
+    {
+        "data": {
+            "title": "The Most Popular Book Ever Written",
+            "num_of_page": 1000,
+            "isbn": "9789171942791",
+            "author": {
+                "name": "John Smith",
+                "nationality": "American",
+                "books_published": 400,
+                "birth_date": "1945-10-11"
+        }
+    }
+
+    ```
+
+5. Consider using the API gateway pattern when things start to get more complicated. Maybe you need to talk to multiple microservices before compiling a response, and some of the responses can be parallelized.
+ 
+6. Allow sorting by different metrics. Or, at least tell the user how the resources are sorted.
+
+7. Send meaningful `message`s, they are super helpful for a human debugger. It’s like comments for your API.
+
+8. Following up from the last point, take advantage of HTTP status codes. They can be made quite fine grained, and tells a lot to the user when things go wrong. At least avoid doing the following:
+    ```
+    GET http://yourapi.com/v1/usefull_stuff
+    200 OK
+    {
+        "data": [],
+        "status_code": 200,
+        "message": "0 resources found"
+    }
+    ```
+Do the users a favor and send a `404 Not Found`.
+
+9. It looks odd when you write a blog post and title it `8  Things To Do When Designing REST APIs`. Don't do it.
+
+10. Trust people who title their blog post as `10  Things To Do When Designing REST APIs`.
+
+### Last Words
+While designing a REST API, more often than not, the UI/UX is not considered at all since the application typically lives behind the scenes. It's still worth putting the effort so that your users don't go nuts. Anyway, that's all I got so far. Let me know your thoughts!
+---
+pub_date: 2019-11-18
+---
+twitter_handle: sirsalekin
