@@ -102,13 +102,13 @@
             <span class="o">.</span>
             <span class="o">.</span>
             <span class="k">if</span> <span class="n">dstSym</span> <span class="o">==</span> <span class="n">srcSym</span><span class="p">:</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-                <span class="k">return</span> <span class="bp">False</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">False</span>
                  <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">True</span>
+                <span class="k">return</span> <span class="kc">True</span>
         <span class="k">except</span> <span class="ne">IndexError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="k">print</span> <span class="p">(</span><span class="s2">&quot;out of the board {0} {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
-            <span class="k">return</span> <span class="bp">False</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;out of the board </span><span class="si">{0}</span><span class="s2"> </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">get_sym</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
@@ -117,7 +117,7 @@
             <span class="o">.</span>
             <span class="o">.</span>
         <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">None</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="nf">get_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">posit</span><span class="p">):</span>
         <span class="k">pass</span>
@@ -133,7 +133,7 @@
              <span class="o">.</span>
             <span class="k">return</span> <span class="n">valid_moves</span>
         <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Invalid position, TypeError raised.&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid position, TypeError raised.&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="p">[]</span>
 
 
@@ -175,7 +175,7 @@
                         <span class="p">]</span>
         <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">pairs_false</span><span class="p">:</span>
             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">subTest</span><span class="p">(</span><span class="n">pair</span><span class="o">=</span><span class="n">pair</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">assertIs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threeX3Board</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="bp">False</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertIs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threeX3Board</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="kc">False</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
@@ -214,7 +214,7 @@ into the following:</p>
                         <span class="p">]</span>
         <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">pairs_false</span><span class="p">:</span>
             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">subTest</span><span class="p">(</span><span class="n">pair</span><span class="o">=</span><span class="n">pair</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">assertIs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threeX3Board</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="bp">False</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertIs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threeX3Board</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="kc">False</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
