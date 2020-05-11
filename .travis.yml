@@ -7,6 +7,6 @@ script: "lektor build"
 deploy:
     provider: script
     script: "lektor deploy ghpages"
-    cleanup: true
+    skip_cleanup: true
     on:
-        branch: deploy 
+        branch: deploy
