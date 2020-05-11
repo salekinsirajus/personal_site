@@ -8,5 +8,6 @@ deploy:
     provider: script
     script: "lektor deploy ghpages"
     cleanup: true
+    github_token: GITHUB_TOKEN
     on:
         branch: master
