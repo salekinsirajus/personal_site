@@ -9,4 +9,4 @@ deploy:
     script: "lektor deploy ghpages"
     skip_cleanup: true
     on:
-        branch: deploy
+        branch: master
